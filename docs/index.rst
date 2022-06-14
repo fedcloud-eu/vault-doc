@@ -15,9 +15,6 @@
 Welcome to fedcloudclient's documentation!
 ==========================================
 
-.. image:: https://zenodo.org/badge/336671726.svg
-   :target: https://zenodo.org/badge/latestdoi/336671726
-
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
@@ -26,11 +23,6 @@ Welcome to fedcloudclient's documentation!
    quickstart
    install
    usage
-   development
-   scripts
-   fedcloudclient
-   FAQ
-   cheat
 
 
 

@@ -18,8 +18,8 @@ sys.path.insert(0, os.path.abspath("../"))
 
 # -- Project information -----------------------------------------------------
 
-project = "fedcloudclient"
-copyright = "2020, Viet Tran"
+project = "Vault-doc"
+copyright = "2022, Viet Tran"
 author = "Viet Tran"
 
 # The full version, including alpha/beta/rc tags
@@ -53,7 +53,7 @@ exclude_patterns: List[str] = []
 html_context = {
     "display_github": True,
     "github_user": "tdviet",
-    "github_repo": "fedcloudclient",
+    "github_repo": "vault-doc",
     "github_version": "master/docs/",
 }
 
@@ -61,7 +61,7 @@ html_context = {
 # a list of builtin themes.
 #
 html_theme = "sphinx_rtd_theme"
-html_logo = "fedcloudclient-logo-non-transparent-small.png"
+html_logo = "vault-logo.png"
 html_theme_options = {
     "logo_only": True,
     "display_version": False,
