@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Usage &mdash; Vault-doc  documentation</title>
+  <title>Using Secret management service &mdash; Vault-doc  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Service design and implementation" href="design.html" />
+    <link rel="next" title="Using Secret management service via FedCloud client" href="fedcloud.html" />
     <link rel="prev" title="Introduction" href="intro.html" /> 
 </head>
 
@@ -42,13 +42,14 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#using-vault-via-web-based-gui">Using Vault via web-based GUI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#using-vault-via-vault-cli-and-access-token">Using Vault via Vault CLI and access token</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using Secret management service</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#using-secret-management-service-via-web-based-gui">Using Secret management service via web-based GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-secret-management-service-via-vault-cli-and-access-token">Using Secret management service via Vault CLI and access token</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#using-vault-via-rest-api-or-external-clients">Using Vault via REST API or external clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="fedcloud.html">Using Secret management service via FedCloud client</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design.html">Service design and implementation</a></li>
 </ul>
 
@@ -66,7 +67,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Usage</li>
+      <li>Using Secret management service</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/fedcloud-eu/vault-doc/blob/master/docs/quickstart.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -76,11 +77,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="usage">
-<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h1>
+  <section id="using-secret-management-service">
+<h1>Using Secret management service<a class="headerlink" href="#using-secret-management-service" title="Permalink to this heading"></a></h1>
 <p>Vault service can be used via web-based GUI, command-line client or third-party tools/libraries.</p>
-<section id="using-vault-via-web-based-gui">
-<h2>Using Vault via web-based GUI<a class="headerlink" href="#using-vault-via-web-based-gui" title="Permalink to this heading"></a></h2>
+<section id="using-secret-management-service-via-web-based-gui">
+<h2>Using Secret management service via web-based GUI<a class="headerlink" href="#using-secret-management-service-via-web-based-gui" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>Open <a class="reference external" href="https://vault.services.fedcloud.eu:8200">https://vault.services.fedcloud.eu:8200</a> in your browser.</p></li>
 <li><p>Choose OIDC authentication method in the pulldown menu, and click on the button
@@ -106,8 +107,8 @@ then your ID in the EGI Check-in to enter your private secret space, then browse
 secrets</p></li>
 </ul>
 </section>
-<section id="using-vault-via-vault-cli-and-access-token">
-<h2>Using Vault via Vault CLI and access token<a class="headerlink" href="#using-vault-via-vault-cli-and-access-token" title="Permalink to this heading"></a></h2>
+<section id="using-secret-management-service-via-vault-cli-and-access-token">
+<h2>Using Secret management service via Vault CLI and access token<a class="headerlink" href="#using-secret-management-service-via-vault-cli-and-access-token" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>Install Vault CLI  if needed. See <a class="reference external" href="https://www.vaultproject.io/downloads">https://www.vaultproject.io/downloads</a> for downloading Vault for
 different OS.</p></li>
@@ -188,7 +189,7 @@ commands is available at <a class="reference external" href="https://www.vaultpr
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="intro.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="design.html" class="btn btn-neutral float-right" title="Service design and implementation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="fedcloud.html" class="btn btn-neutral float-right" title="Using Secret management service via FedCloud client" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

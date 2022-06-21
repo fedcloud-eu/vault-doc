@@ -1,10 +1,10 @@
-Usage
-=====
+Using Secret management service
+===============================
 
 Vault service can be used via web-based GUI, command-line client or third-party tools/libraries.
 
-Using Vault via web-based GUI
-*****************************
+Using Secret management service via web-based GUI
+*************************************************
 
 * Open https://vault.services.fedcloud.eu:8200 in your browser.
 
@@ -37,8 +37,8 @@ Using Vault via web-based GUI
   then your ID in the EGI Check-in to enter your private secret space, then browse/view/edit your
   secrets
 
-Using Vault via Vault CLI and access token
-******************************************
+Using Secret management service via Vault CLI and access token
+**************************************************************
 
 * Install Vault CLI  if needed. See https://www.vaultproject.io/downloads for downloading Vault for
   different OS.
