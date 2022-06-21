@@ -1,5 +1,5 @@
-Using Secret management service via FedCloud client
-===================================================
+Integration with FedCloud client
+================================
 
 The Secret management service is build on the base of Hashicorp’s Vault which is well-known and
 well-supported by different tools and services. However, using the service via Vault CLI is not comfortable: users
