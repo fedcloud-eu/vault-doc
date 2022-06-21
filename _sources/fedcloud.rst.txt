@@ -14,7 +14,8 @@ Integration with EGI Infrastructure, working out of the box
 
 As the native command-line client for EGI Cloud infrastructure, FedCloud client is tightly integrated with different
 EGI services. The client should have default setting tailored to EGI infrastructure environment and work out of the
-box without requiring additional configuration from end-users. Note the simple syntax
+box without requiring additional configuration from end-users. Single execution of a simple command is sufficient for
+most of operations:
 
 ::
 
