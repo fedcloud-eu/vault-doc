@@ -3,7 +3,8 @@ User guides
 
 Secret management service is implemented on the base of Hashicorp’s Vault which has web-based GUI and is supported by
 many client tools and libraries. However, using Secret management service via FedCloud client is strongly recommended
-as it is working out of the box and have advanced features.
+as the client is tightly integrated with the service, it works out of the box without additional configuration,
+has simple syntax and also advanced features like encrypted secrets.
 
 Prerequisite
 ************
