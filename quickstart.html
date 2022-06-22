@@ -102,8 +102,8 @@ or <a class="reference external" href="https://indigo-dc.gitbook.io/oidc-agent/"
 <p>As FedCloud client is tightly integrated with Secret management service, no additional setting is required. Users can
 access the service immediately with simple commands:</p>
 <ul class="simple">
-<li><p>Create a secret in Secret management service, with a name &quot;my_first_secret&quot;, store a string &quot;My secret word&quot; in
-the key &quot;mykey&quot;:</p></li>
+<li><p>Create a secret in Secret management service, with a name <code class="docutils literal notranslate"><span class="pre">my_first_secret</span></code>, store a string <code class="docutils literal notranslate"><span class="pre">My</span> <span class="pre">secret</span> <span class="pre">word</span></code> in
+the key <code class="docutils literal notranslate"><span class="pre">mykey</span></code>:</p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret put my_first_secret mykey=&quot;My secret word&quot;
 </pre></div>
@@ -117,7 +117,7 @@ my_first_secret
 </div>
 <ul class="simple">
 <li><p>Get a secret from Secret management service. If the key is given, the client will print only the secret value stored
-in the key (useful for scripting), otherwise it prints the table of all key:value pairs.</p></li>
+in the key (useful for scripting), otherwise it will print the table of all key:value pairs.</p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret get my_first_secret
 key    value
