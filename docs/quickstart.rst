@@ -89,20 +89,20 @@ Encrypted secrets
 *****************
 
 For highly-sensitive secrets, users can choose to encrypt the secret values before uploading it to the service. The
-encryption is done automatically on the fly if encryption key (passphrase) is provided:
+encryption is done automatically on the fly if an encryption key (passphrase) is provided:
 
 ::
 
     $ fedcloud secret put certificate cert=@hostcert.pem key=@hostkey.pem --encrypt-key my-pass-phrase
 
 Decryption is done in a similar way, just by providing decryption key, the secret value will be decrypted
-automatically:
+automatically if the key is correct:
 
 ::
 
     $ fedcloud secret get certificate cert --decrypt-key my-pass-phrase
 
-Users cam verify what is stored in the Vault by reading the secrets without providing decryption key.
+Users can verify what is stored in the Vault by reading the secrets without providing decryption key.
 
 ::
 
