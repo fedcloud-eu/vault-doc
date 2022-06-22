@@ -1,7 +1,9 @@
 Using Secret management service via official GUI and clients
 ============================================================
 
-Vault service can be used via web-based GUI, command-line client or third-party tools/libraries.
+Although using Secret management service via FedCloud client is strongly recommended, the service is compatible with
+Vault and can be used via the web-based GUI or Vault's native client tools and libraries. Existing services and
+applications using Vault can be easily integrated to the Secret management service with little efforts.
 
 Using Secret management service via web-based GUI
 *************************************************

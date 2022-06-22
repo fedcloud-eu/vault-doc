@@ -1,14 +1,14 @@
 User guides
 ===========
 
-Secret management service is implemented based on on Hashicorp’s Vault which has web-based GUI and is supported by
+Secret management service is implemented on the base of Hashicorp’s Vault which has web-based GUI and is supported by
 many client tools and libraries. However, using Secret management service via FedCloud client is strongly recommended
 as it is working out of the box and have advanced features.
 
 Prerequisite
 ************
 
-* The latest version of FedCloud client (1.2.18 and higher) is installed. If not, install the client:
+* The latest version of FedCloud client (1.2.18 and higher) is installed. If not, install or upgrade the client:
 
 ::
 
