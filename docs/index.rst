@@ -14,9 +14,8 @@ https://vault.services.fedcloud.eu:8200.
    intro
    quickstart
    fedcloud
-   design
    usage
-
+   design
 
 
 Indices and tables
