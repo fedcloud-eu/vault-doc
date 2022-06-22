@@ -1,5 +1,40 @@
-Integration with FedCloud client
-================================
+Using Secret management service via FedCloud client
+===================================================
+
+Secret management service is implemented based on on Hashicorp’s Vault which has web-based GUI and is supported by
+many client tools and libraries. However, using Secret management service via FedCloud client is strongly recommended
+as it is working out of the box and have advanced features.
+
+Prerequisite
+************
+
+* The latest version of FedCloud client (1.2.18 and higher) is installed. If not, install the client:
+
+::
+
+    $ pip3 install -U fedcloudclient
+
+* Valid access token from EGI Check-in, either from `EGI Check-in Token Portal <https://aai.egi.eu/token>`_
+  or `oidc-agent <https://indigo-dc.gitbook.io/oidc-agent/>`_, is set to environment variable:
+
+::
+
+    $ export OIDC_ACCESS_TOKEN=<ACCESS_TOKEN>
+
+Usage
+*****
+
+
+
+
+
+
+
+
+
+
+
+
 
 The Secret management service is build on the base of Hashicorp’s Vault which is well-known and
 well-supported by different tools and services. However, using the service via Vault CLI is not comfortable: users
