@@ -77,12 +77,13 @@
 and operations. The secrets are often stored as clear texts in configuration files or code repositories that expose
 security risks. Furthermore, the secrets stored in files are static and difficult to change/rotate. The secret
 management service for EGI Infrastructure is developed to solve the issues.</p>
-<p>The secret management service is designed as follows:</p>
+<p>The Secret management service is designed as follows:</p>
 <ul class="simple">
-<li><p>Non-intrusion: Operates as a stand-alone service, no extra efforts from site admins to support the service, no
-additional permissions are needed for users.</p></li>
-<li><p>Simple usage: Authentication via OIDC tokens from EGI Check-in, no extra credentials are required. The service is
-based on Hashicorp’s Vault which is well-known in industry, with many client tools and libraries.</p></li>
+<li><p>Simple usage: A dedicated module of FedCloud client is developed to make the service works out of the box with very
+simple syntax. Authentication is realized via OIDC tokens from EGI Check-in, no additional registration,
+no extra credentials are required.</p></li>
+<li><p>Compatibility: The service is based on Hashicorp’s Vault which is well-known in industry, with many client tools
+and libraries. Software for service and clients are open-sourced with strong support from communities.</p></li>
 <li><p>High-availability: Service instances are distributed on different sites, without single point of failure. A generic
 endpoint <a class="reference external" href="https://vault.services.fedcloud.eu:8200">https://vault.services.fedcloud.eu:8200</a> is dynamically assigned
 to a healthy instance via Dynamic DNS service.</p></li>
