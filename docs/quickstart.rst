@@ -1,4 +1,4 @@
-Qhickstart
+Quickstart
 ==========
 
 Secret management service is implemented based on on Hashicorp’s Vault which has web-based GUI and is supported by
@@ -28,7 +28,7 @@ As FedCloud client is tightly integrated with Secret management service, no addi
 access the service immediately with simple commands:
 
 * Create a secret in Secret management service, with a name "my_first_secret", store a string "My secret word" in
-the key "mykey":
+  the key "mykey":
 
 ::
 
@@ -42,7 +42,7 @@ the key "mykey":
     my_first_secret
 
 * Get a secret from Secret management service. If the key is given, the client will print only the secret value stored
-in the key (useful for scripting), otherwise it prints the table of all key:value pairs.
+  in the key (useful for scripting), otherwise it prints the table of all key:value pairs.
 
 ::
 
