@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quickstart &mdash; Vault-doc  documentation</title>
+  <title>User guides &mdash; Vault-doc  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Integration with FedCloud client" href="fedcloud.html" />
+    <link rel="next" title="Using Secret management service via official GUI and clients" href="usage.html" />
     <link rel="prev" title="Introduction" href="intro.html" /> 
 </head>
 
@@ -42,12 +42,13 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Quickstart</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User guides</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#prerequisite">Prerequisite</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quickstart">Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#secret-values-from-files">Secret values from files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#encrypted-secrets">Encrypted secrets</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="fedcloud.html">Integration with FedCloud client</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Using Secret management service via official GUI and clients</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design.html">Service design and implementation</a></li>
 </ul>
@@ -66,7 +67,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Quickstart</li>
+      <li>User guides</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/fedcloud-eu/vault-doc/blob/master/docs/quickstart.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -76,8 +77,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="quickstart">
-<h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this heading"></a></h1>
+  <section id="user-guides">
+<h1>User guides<a class="headerlink" href="#user-guides" title="Permalink to this heading"></a></h1>
 <p>Secret management service is implemented based on on Hashicorp’s Vault which has web-based GUI and is supported by
 many client tools and libraries. However, using Secret management service via FedCloud client is strongly recommended
 as it is working out of the box and have advanced features.</p>
@@ -97,8 +98,8 @@ or <a class="reference external" href="https://indigo-dc.gitbook.io/oidc-agent/"
 </pre></div>
 </div>
 </section>
-<section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<section id="quickstart">
+<h2>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this heading"></a></h2>
 <p>As FedCloud client is tightly integrated with Secret management service, no additional setting is required. Users can
 access the service immediately with simple commands:</p>
 <ul class="simple">
@@ -116,7 +117,7 @@ my_first_secret
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>Get a secret from Secret management service. If the key is given, the client will print only the secret value stored
+<li><p>Get a secret from Secret management service. If a key is given, the client will print only the secret value stored
 in the key (useful for scripting), otherwise it will print the table of all key:value pairs.</p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret get my_first_secret
@@ -128,6 +129,51 @@ $ fedcloud secret get my_first_secret mykey
 My secret word
 </pre></div>
 </div>
+<ul class="simple">
+<li><p>Delete a secret from Secret management service.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret delete my_first_secret
+</pre></div>
+</div>
+</section>
+<section id="secret-values-from-files">
+<h2>Secret values from files<a class="headerlink" href="#secret-values-from-files" title="Permalink to this heading"></a></h2>
+<p>If the value string is started with &quot;&#64;&quot;, the FedCloud client will read the content with the name as the value
+for the key. The following command creates a secret in Secret management service with a name <code class="docutils literal notranslate"><span class="pre">certificate</span></code> and
+store host certificate and key in the secret:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret put certificate cert=@hostcert.pem key=@hostkey.pem
+</pre></div>
+</div>
+<p>Users can get the certificate on VM as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret get certificate cert &gt; hostcert.pem
+$ fedcloud secret get certificate key  &gt; hostkey.pem
+</pre></div>
+</div>
+<p>So far, only text files are supported. For binary files, it is recommended to use <code class="docutils literal notranslate"><span class="pre">uuencode`</span> <span class="pre">command</span> <span class="pre">for</span> <span class="pre">encoding</span>
+<span class="pre">the</span> <span class="pre">files</span> <span class="pre">as</span> <span class="pre">texts</span> <span class="pre">before</span> <span class="pre">uploading</span> <span class="pre">and</span> <span class="pre">``uudecode</span></code> for converting the content back to the original format.</p>
+<p>The limit of the secret size is 512kB, it is sufficient for storing certificates, service configuration files and
+so on. For larger datasets, please use permanent cloud storages.</p>
+</section>
+<section id="encrypted-secrets">
+<h2>Encrypted secrets<a class="headerlink" href="#encrypted-secrets" title="Permalink to this heading"></a></h2>
+<p>For highly-sensitive secrets, users can choose to encrypt the secret values before uploading it to the service. The
+encryption is done automatically on the fly if encryption key (passphrase) is provided:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret put certificate cert=@hostcert.pem key=@hostkey.pem --encrypt-key my-pass-phrase
+</pre></div>
+</div>
+<p>Decryption is done in a similar way, just by providing decryption key, the secret value will be decrypted
+automatically:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret get certificate cert --decrypt-key my-pass-phrase
+</pre></div>
+</div>
+<p>Users cam verify what is stored in the Vault by reading the secrets without providing decryption key.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret get certificate cert
+gAAAAAB...............................
+</pre></div>
+</div>
+<p>The encryption is done by standard Python crytography library. Security experts are invited to review the code
+(available at <a class="reference external" href="https://github.com/tdviet/fedcloudclient/blob/master/fedcloudclient/secret.py#L124">GitHub</a>)
+and give feedback and suggestions for improvements if possible.</p>
 </section>
 </section>
 
@@ -136,7 +182,7 @@ My secret word
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="intro.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="fedcloud.html" class="btn btn-neutral float-right" title="Integration with FedCloud client" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="usage.html" class="btn btn-neutral float-right" title="Using Secret management service via official GUI and clients" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

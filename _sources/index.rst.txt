@@ -13,7 +13,6 @@ https://vault.services.fedcloud.eu:8200.
 
    intro
    quickstart
-   fedcloud
    usage
    design
 

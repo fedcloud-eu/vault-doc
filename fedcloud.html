@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Integration with FedCloud client &mdash; Vault-doc  documentation</title>
+  <title>Using Secret management service via FedCloud client &mdash; Vault-doc  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -18,9 +18,7 @@
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Using Secret management service via official GUI and clients" href="usage.html" />
-    <link rel="prev" title="Quickstart" href="quickstart.html" /> 
+    <link rel="search" title="Search" href="search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,14 +38,9 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Integration with FedCloud client</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#integration-with-egi-infrastructure-working-out-of-the-box">Integration with EGI Infrastructure, working out of the box</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#support-for-advanced-features-requested-by-user-communities">Support for advanced features requested by user communities</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">User guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Using Secret management service via official GUI and clients</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design.html">Service design and implementation</a></li>
 </ul>
@@ -66,7 +59,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Integration with FedCloud client</li>
+      <li>Using Secret management service via FedCloud client</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/fedcloud-eu/vault-doc/blob/master/docs/fedcloud.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -76,14 +69,36 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="integration-with-fedcloud-client">
-<h1>Integration with FedCloud client<a class="headerlink" href="#integration-with-fedcloud-client" title="Permalink to this heading"></a></h1>
+  <section id="using-secret-management-service-via-fedcloud-client">
+<h1>Using Secret management service via FedCloud client<a class="headerlink" href="#using-secret-management-service-via-fedcloud-client" title="Permalink to this heading"></a></h1>
+<p>Secret management service is implemented based on on Hashicorp’s Vault which has web-based GUI and is supported by
+many client tools and libraries. However, using Secret management service via FedCloud client is strongly recommended
+as it is working out of the box and have advanced features.</p>
+<section id="prerequisite">
+<h2>Prerequisite<a class="headerlink" href="#prerequisite" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>The latest version of FedCloud client (1.2.18 and higher) is installed. If not, install the client:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip3 install -U fedcloudclient
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Valid access token from EGI Check-in, either from <a class="reference external" href="https://aai.egi.eu/token">EGI Check-in Token Portal</a>
+or <a class="reference external" href="https://indigo-dc.gitbook.io/oidc-agent/">oidc-agent</a>, is set to environment variable:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export OIDC_ACCESS_TOKEN=&lt;ACCESS_TOKEN&gt;
+</pre></div>
+</div>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
 <p>The Secret management service is build on the base of Hashicorp’s Vault which is well-known and
 well-supported by different tools and services. However, using the service via Vault CLI is not comfortable: users
 need at least two steps for creating/getting a secret: first log in to the service and get Vault's token with
 EGI Check-in access token, then read/write secrets with the Vault's token. The FedCloud client module for accessing
 secrets is being developed to solve the issues.</p>
 <p>Expected features of FedCloud client module for the Secret management service:</p>
+</section>
 <section id="integration-with-egi-infrastructure-working-out-of-the-box">
 <h2>Integration with EGI Infrastructure, working out of the box<a class="headerlink" href="#integration-with-egi-infrastructure-working-out-of-the-box" title="Permalink to this heading"></a></h2>
 <p>As the native command-line client for EGI Cloud infrastructure, FedCloud client is tightly integrated with different
@@ -112,10 +127,7 @@ features are being added, so stay tuned.</p>
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="quickstart.html" class="btn btn-neutral float-left" title="Quickstart" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="usage.html" class="btn btn-neutral float-right" title="Using Secret management service via official GUI and clients" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 
