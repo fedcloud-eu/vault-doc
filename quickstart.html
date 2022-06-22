@@ -157,16 +157,16 @@ so on. For larger datasets, please use permanent cloud storages.</p>
 <section id="encrypted-secrets">
 <h2>Encrypted secrets<a class="headerlink" href="#encrypted-secrets" title="Permalink to this heading"></a></h2>
 <p>For highly-sensitive secrets, users can choose to encrypt the secret values before uploading it to the service. The
-encryption is done automatically on the fly if encryption key (passphrase) is provided:</p>
+encryption is done automatically on the fly if an encryption key (passphrase) is provided:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret put certificate cert=@hostcert.pem key=@hostkey.pem --encrypt-key my-pass-phrase
 </pre></div>
 </div>
 <p>Decryption is done in a similar way, just by providing decryption key, the secret value will be decrypted
-automatically:</p>
+automatically if the key is correct:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret get certificate cert --decrypt-key my-pass-phrase
 </pre></div>
 </div>
-<p>Users cam verify what is stored in the Vault by reading the secrets without providing decryption key.</p>
+<p>Users can verify what is stored in the Vault by reading the secrets without providing decryption key.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret get certificate cert
 gAAAAAB...............................
 </pre></div>
