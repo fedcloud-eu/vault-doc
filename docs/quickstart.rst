@@ -27,8 +27,8 @@ Usage
 As FedCloud client is tightly integrated with Secret management service, no additional setting is required. Users can
 access the service immediately with simple commands:
 
-* Create a secret in Secret management service, with a name "my_first_secret", store a string "My secret word" in
-  the key "mykey":
+* Create a secret in Secret management service, with a name ``my_first_secret``, store a string ``My secret word`` in
+  the key ``mykey``:
 
 ::
 
@@ -42,7 +42,7 @@ access the service immediately with simple commands:
     my_first_secret
 
 * Get a secret from Secret management service. If the key is given, the client will print only the secret value stored
-  in the key (useful for scripting), otherwise it prints the table of all key:value pairs.
+  in the key (useful for scripting), otherwise it will print the table of all key:value pairs.
 
 ::
 
@@ -53,6 +53,4 @@ access the service immediately with simple commands:
 
     $ fedcloud secret get my_first_secret mykey
     My secret word
-
-
 
