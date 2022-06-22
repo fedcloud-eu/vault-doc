@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Qhickstart &mdash; Vault-doc  documentation</title>
+  <title>Quickstart &mdash; Vault-doc  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -42,7 +42,7 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Qhickstart</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quickstart</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#prerequisite">Prerequisite</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
 </ul>
@@ -66,7 +66,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Qhickstart</li>
+      <li>Quickstart</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/fedcloud-eu/vault-doc/blob/master/docs/quickstart.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -76,8 +76,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="qhickstart">
-<h1>Qhickstart<a class="headerlink" href="#qhickstart" title="Permalink to this heading"></a></h1>
+  <section id="quickstart">
+<h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this heading"></a></h1>
 <p>Secret management service is implemented based on on Hashicorp’s Vault which has web-based GUI and is supported by
 many client tools and libraries. However, using Secret management service via FedCloud client is strongly recommended
 as it is working out of the box and have advanced features.</p>
@@ -102,9 +102,9 @@ or <a class="reference external" href="https://indigo-dc.gitbook.io/oidc-agent/"
 <p>As FedCloud client is tightly integrated with Secret management service, no additional setting is required. Users can
 access the service immediately with simple commands:</p>
 <ul class="simple">
-<li><p>Create a secret in Secret management service, with a name &quot;my_first_secret&quot;, store a string &quot;My secret word&quot; in</p></li>
+<li><p>Create a secret in Secret management service, with a name &quot;my_first_secret&quot;, store a string &quot;My secret word&quot; in
+the key &quot;mykey&quot;:</p></li>
 </ul>
-<p>the key &quot;mykey&quot;:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret put my_first_secret mykey=&quot;My secret word&quot;
 </pre></div>
 </div>
@@ -116,9 +116,9 @@ my_first_secret
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>Get a secret from Secret management service. If the key is given, the client will print only the secret value stored</p></li>
+<li><p>Get a secret from Secret management service. If the key is given, the client will print only the secret value stored
+in the key (useful for scripting), otherwise it prints the table of all key:value pairs.</p></li>
 </ul>
-<p>in the key (useful for scripting), otherwise it prints the table of all key:value pairs.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret get my_first_secret
 key    value
 -----  --------------
