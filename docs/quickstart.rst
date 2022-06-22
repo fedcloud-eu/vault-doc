@@ -64,8 +64,8 @@ access the service immediately with simple commands:
 Secret values from files
 ************************
 
-If the value string is started with "@", the FedCloud client will read the content with the name as the value
-for the key. The following command creates a secret in Secret management service with a name ``certificate`` and
+If the value string is started with "@", the FedCloud client will read the content of the file with the name for the
+value for the key. The following command creates a secret in Secret management service with a name ``certificate`` and
 store host certificate and key in the secret:
 
 ::
@@ -79,7 +79,7 @@ Users can get the certificate on VM as follows:
     $ fedcloud secret get certificate cert > hostcert.pem
     $ fedcloud secret get certificate key  > hostkey.pem
 
-So far, only text files are supported. For binary files, it is recommended to use ``uuencode` command for encoding
+So far, only text files are supported. For binary files, it is recommended to use ``uuencode`` command for encoding
 the files as texts before uploading and ``uudecode`` for converting the content back to the original format.
 
 The limit of the secret size is 512kB, it is sufficient for storing certificates, service configuration files and
@@ -112,5 +112,4 @@ Users cam verify what is stored in the Vault by reading the secrets without prov
 The encryption is done by standard Python crytography library. Security experts are invited to review the code
 (available at `GitHub <https://github.com/tdviet/fedcloudclient/blob/master/fedcloudclient/secret.py#L124>`_)
 and give feedback and suggestions for improvements if possible.
-
 
