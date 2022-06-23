@@ -9,6 +9,8 @@ has simple syntax and also advanced features like encrypted secrets.
 Prerequisite
 ************
 
+.. highlight:: shell
+
 * The latest version of FedCloud client (1.2.18 and higher) is installed. If not, install or upgrade the client:
 
 ::
@@ -121,7 +123,7 @@ Export and import secrets
 
 Users can print secrets to files YAML/JSON format for further processing by option ``--output-format`` or simply ``-f``:
 
-::
+.. code-block:: shell
 
     $ fedcloud secret get my_app_secrets -f json
 
@@ -134,8 +136,9 @@ telling client to read secrets from files:
 
     $ fedcloud secret put my_second_app_secrets @my_app_secrets.yaml
 
-Note the difference in examples: ``cert=@hostcert.pem`` for reading the file content as the value for the key ``cert``,
-and ``@my_app_secrets.yaml`` for reading whole key:value pairs from the YAML file.
+
+Note the difference in examples: ``cert=@hostcert.pem`` for reading the content of the file ``horstcert.pem`` as the
+value for the key ``cert``, and ``@my_app_secrets.yaml`` for reading whole key:value pairs from the YAML file.
 
 As YAML format is simpler, it is expected by default unless the filename has ``.json`` extension. Try to export your
 secrets to both formats to see the differences between formats.
