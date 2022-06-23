@@ -64,8 +64,8 @@ access the service immediately with simple commands:
     $ fedcloud secret delete my_first_secret
 
 
-Secret values from small files
-******************************
+Secret values from small text files
+***********************************
 
 If the value string is started with "@", the FedCloud client will read the content of the file with the name for the
 value for the key. The following command creates a secret ``certificate`` in Secret management service for storing
