@@ -31,7 +31,7 @@ Quickstart
 As FedCloud client is tightly integrated with Secret management service, no additional setting is required. Users can
 access the service immediately with simple commands:
 
-* Create a secret ``my_app_secrets`` in Secret management service, store MySQL and admin passwords in the secret:
+* Create a secret :console:`my_app_secrets` in Secret management service, store MySQL and admin passwords in the secret:
 
 ::
 
