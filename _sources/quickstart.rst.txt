@@ -127,16 +127,19 @@ Users can print secrets to files YAML/JSON format for further processing by opti
 
     $ fedcloud secret get my_app_secrets -f yaml > my_app_secrets.yaml
 
-The secrets in YAML/JSON files can be imported back to the service by adding "@" before filenames, telling client to
-read data from files:
+The secrets in YAML/JSON files can be imported back to the service by adding "@" before filenames as parameters,
+telling client to read secrets from files:
 
 ::
 
     $ fedcloud secret put my_second_app_secrets @my_app_secrets.yaml
 
-Note the difference in examples: "cert=@hostcert.pem" for reading file content as value for the key, and
-"@my_app_secrets.yaml" for reading key:value pairs from YAML files.
+Note the difference in examples: ``cert=@hostcert.pem`` for reading file content as value for the key ``cert``, and
+``@my_app_secrets.yaml`` for reading whole key:value pairs from YAML files.
 
-Importing secrets in files in free text format "key=value" is not supported as the format is error-prone, especially for
-multi-line secret values or values with special characters. Users can replace "=" to " : " for converting simple free
-text files to YAML format. Note the blank space after ":" required by YAML syntax.
+As YAML format is simpler, it is expected by default unless the filename has ".json" extension. Try to export your
+secrets to both formats to see the differences between formats.
+
+Importing secrets in files in free text format "key=value" is not supported as the format is error-prone, especially
+for multi-line secret values or values with special characters. Users can replace "=" to " : " for converting simple
+free text files to YAML format. Note the blank space after ":" required by YAML syntax.
