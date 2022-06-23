@@ -70,7 +70,7 @@ Secret values from small text files
 ***********************************
 
 If the value string is started with "@", the FedCloud client will read the content of the file with the name for the
-value of the key. The following command creates a secret ``certificate`` in Secret management service for storing
+value of the key. The following command creates a secret `certificate` in Secret management service for storing
 host certificate and its key:
 
 ::
