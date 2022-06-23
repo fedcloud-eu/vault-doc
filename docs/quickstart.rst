@@ -31,7 +31,7 @@ Quickstart
 As FedCloud client is tightly integrated with Secret management service, no additional setting is required. Users can
 access the service immediately with simple commands:
 
-* Create a secret :console:`my_app_secrets` in Secret management service, store MySQL and admin passwords in the secret:
+* Create a secret ``my_app_secrets`` in Secret management service, store MySQL and admin passwords in the secret:
 
 ::
 
@@ -70,7 +70,7 @@ Secret values from small text files
 ***********************************
 
 If the value string is started with "@", the FedCloud client will read the content of the file with the name for the
-value of the key. The following command creates a secret `certificate` in Secret management service for storing
+value of the key. The following command creates a secret ``certificate`` in Secret management service for storing
 host certificate and its key:
 
 ::
