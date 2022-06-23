@@ -117,58 +117,58 @@ secrets</p></li>
 different OS.</p></li>
 <li><p>Set environment for URL of Vault server:</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export VAULT_ADDR=https://vault.services.fedcloud.eu:8200
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span> <span class="nv">VAULT_ADDR</span><span class="o">=</span>https://vault.services.fedcloud.eu:8200
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>Get your EGI Check-in access token (e.g. from <a class="reference external" href="https://aai.egi.eu/token/">https://aai.egi.eu/token/</a> or oidc-agent)
 and set it to an environment variable:</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export ACCESS_TOKEN=”ADD_YOUR_ACCESS_TOKEN_HERE”
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span> <span class="nv">ACCESS_TOKEN</span><span class="o">=</span>”ADD_YOUR_ACCESS_TOKEN_HERE”
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>Login to Vault using access tokens:</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ vault write auth/jwt/login jwt=$ACCESS_TOKEN
-Key                  Value
----                  -----
-token                s.XXXXXXXXXXXXXXXXXXXXXXX
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>vault write auth/jwt/login <span class="nv">jwt</span><span class="o">=</span><span class="nv">$ACCESS_TOKEN</span>
+<span class="go">Key                  Value</span>
+<span class="go">---                  -----</span>
+<span class="go">token                s.XXXXXXXXXXXXXXXXXXXXXXX</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>The command will return a Vault’s token in the form “token   s.XXXXXXXXXXXXXXXXX”. Save the token
 to an environment variable and use it for manipulation with secrets in Vault</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export VAULT_TOKEN=”s.XXXXXXXXXXXXXX”
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span> <span class="nv">VAULT_TOKEN</span><span class="o">=</span>”s.XXXXXXXXXXXXXX”
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>For convenience, set your Vault’s home path to an environment variable</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export VAULT_HOME=/secrets/YOUR_CHECKIN_ID@egi.eu/
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span> <span class="nv">VAULT_HOME</span><span class="o">=</span>/secrets/YOUR_CHECKIN_ID@egi.eu/
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>List secrets in your “home directory”. VAULT_ADDR and VAULT_TOKEN must be set:</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ vault list $VAULT_HOME
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>vault list <span class="nv">$VAULT_HOME</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>Create a new secret with name “test” in your “home directory”, store value “value1” in key “key1”:</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ vault write $VAULT_HOME/test key1=value1
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>vault write <span class="nv">$VAULT_HOME</span>/test <span class="nv">key1</span><span class="o">=</span>value1
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>Read your secret:</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ vault read $VAULT_HOME/test
-Key                 Value
----                 -----
-refresh_interval    768h
-key1                value1
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>vault <span class="nb">read</span> <span class="nv">$VAULT_HOME</span>/test
+<span class="go">Key                 Value</span>
+<span class="go">---                 -----</span>
+<span class="go">refresh_interval    768h</span>
+<span class="go">key1                value1</span>
 </pre></div>
 </div>
 <p>There are alternative commands “kv put”, “kv get” for “write”, “read”. The full list of Vault

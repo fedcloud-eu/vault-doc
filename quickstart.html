@@ -182,9 +182,9 @@ and give feedback and suggestions for improvements if possible.</p>
 <section id="export-and-import-secrets">
 <h2>Export and import secrets<a class="headerlink" href="#export-and-import-secrets" title="Permalink to this heading"></a></h2>
 <p>Users can print secrets to files YAML/JSON format for further processing by option <code class="docutils literal notranslate"><span class="pre">--output-format</span></code> or simply <code class="docutils literal notranslate"><span class="pre">-f</span></code>:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret get my_app_secrets -f json
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get my_app_secrets -f json
 
-$ fedcloud secret get my_app_secrets -f yaml &gt; my_app_secrets.yaml
+<span class="gp">$ </span>fedcloud secret get my_app_secrets -f yaml &gt; my_app_secrets.yaml
 </pre></div>
 </div>
 <p>The secrets in YAML/JSON files can be imported back to the service by adding &quot;&#64;&quot; before filenames as parameters,

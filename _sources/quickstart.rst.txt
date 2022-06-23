@@ -123,7 +123,7 @@ Export and import secrets
 
 Users can print secrets to files YAML/JSON format for further processing by option ``--output-format`` or simply ``-f``:
 
-.. code-block:: shell
+::
 
     $ fedcloud secret get my_app_secrets -f json
 

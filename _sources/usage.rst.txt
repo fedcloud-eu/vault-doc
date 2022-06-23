@@ -44,6 +44,8 @@ Using Secret management service via web-based GUI
 Using Secret management service via Vault CLI and access token
 **************************************************************
 
+.. highlight:: console
+
 * Install Vault CLI  if needed. See https://www.vaultproject.io/downloads for downloading Vault for
   different OS.
 
