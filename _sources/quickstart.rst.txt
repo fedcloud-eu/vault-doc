@@ -68,7 +68,7 @@ Secret values from small text files
 ***********************************
 
 If the value string is started with "@", the FedCloud client will read the content of the file with the name for the
-value for the key. The following command creates a secret ``certificate`` in Secret management service for storing
+value of the key. The following command creates a secret ``certificate`` in Secret management service for storing
 host certificate and its key:
 
 ::
@@ -115,3 +115,28 @@ Users can verify what is stored in the Vault by reading the secrets without prov
 The encryption is done by standard Python crytography library. Security experts are invited to review the code
 (available at `GitHub <https://github.com/tdviet/fedcloudclient/blob/master/fedcloudclient/secret.py#L124>`_)
 and give feedback and suggestions for improvements if possible.
+
+Export and import secrets
+*************************
+
+Users can print secrets to files YAML/JSON format for further processing by option ``--output-format`` or simply ``-f``:
+
+::
+
+    $ fedcloud secret get my_app_secrets -f json
+
+    $ fedcloud secret get my_app_secrets -f yaml > my_app_secrets.yaml
+
+The secrets in YAML/JSON files can be imported back to the service by adding "@" before filenames, telling client to
+read data from files:
+
+::
+
+    $ fedcloud secret put my_second_app_secrets @my_app_secrets.yaml
+
+Note the difference in examples: "cert=@hostcert.pem" for reading file content as value for the key, and
+"@my_app_secrets.yaml" for reading key:value pairs from YAML files.
+
+Importing secrets in files in free text format "key=value" is not supported as the format is error-prone, especially for
+multi-line secret values or values with special characters. Users can replace "=" to " : " for converting simple free
+text files to YAML format. Note the blank space after ":" required by YAML syntax.
