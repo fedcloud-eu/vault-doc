@@ -1,9 +1,11 @@
-Using Secret management service via official GUI and clients
-============================================================
+Using Secret management service via Vault's GUI and client
+==========================================================
 
-Although using Secret management service via FedCloud client is strongly recommended, the service is compatible with
-Vault and can be used via the web-based GUI or Vault's native client tools and libraries. Existing services and
-applications using Vault can be easily integrated to the Secret management service with little efforts.
+Although using Secret management service via FedCloud client is strongly recommended, the service is fully compatible
+with Vault and can be used via the web-based GUI or Vault's native client tool and libraries. The native client tool is
+more complicated but it has some functionalities not offered by FedCloud client, e.g. token renew. The compatibility
+also enable integration of existing services and applications that are already using Vault, to the Secret management
+service.
 
 Using Secret management service via web-based GUI
 *************************************************
