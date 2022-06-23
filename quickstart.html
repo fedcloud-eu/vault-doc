@@ -89,7 +89,7 @@ has simple syntax and also advanced features like encrypted secrets.</p>
 <ul class="simple">
 <li><p>The latest version of FedCloud client (1.2.18 and higher) is installed. If not, install or upgrade the client:</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip3 install -U fedcloudclient
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip3 install -U fedcloudclient
 </pre></div>
 </div>
 <ul class="simple">
@@ -97,7 +97,7 @@ has simple syntax and also advanced features like encrypted secrets.</p>
 <a class="reference external" href="https://aai.egi.eu/token">EGI Check-in Token Portal</a>
 or <a class="reference external" href="https://indigo-dc.gitbook.io/oidc-agent/">oidc-agent</a>, is set to environment variable:</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export OIDC_ACCESS_TOKEN=&lt;ACCESS_TOKEN&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">export</span> <span class="nv">OIDC_ACCESS_TOKEN</span><span class="o">=</span>&lt;ACCESS_TOKEN&gt;
 </pre></div>
 </div>
 </section>
@@ -108,13 +108,13 @@ access the service immediately with simple commands:</p>
 <ul class="simple">
 <li><p>Create a secret <code class="docutils literal notranslate"><span class="pre">my_app_secrets</span></code> in Secret management service, store MySQL and admin passwords in the secret:</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret put my_app_secrets mysql_password=123456 admin_password=abcdef
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret put my_app_secrets <span class="nv">mysql_password</span><span class="o">=</span><span class="m">123456</span> <span class="nv">admin_password</span><span class="o">=</span>abcdef
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>List secrets stored in Secret management service:</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret list
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret list
 my_app_secrets
 </pre></div>
 </div>
@@ -122,21 +122,21 @@ my_app_secrets
 <li><p>Get a secret from Secret management service. If a key is given, the client will print only the secret value stored
 in the key (useful for scripting), otherwise it will print the table of all key:value pairs.</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret get my_app_secrets
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret get my_app_secrets
 key             value
 --------------  -------
 admin_password  abcdef
-mysql_password  123456
+mysql_password  <span class="m">123456</span>
 
 
 $ fedcloud secret get my_app_secrets mysql_password
-123456
+<span class="m">123456</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>Delete a secret from Secret management service.</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret delete my_app_secrets
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret delete my_app_secrets
 </pre></div>
 </div>
 </section>
@@ -145,11 +145,11 @@ $ fedcloud secret get my_app_secrets mysql_password
 <p>If the value string is started with &quot;&#64;&quot;, the FedCloud client will read the content of the file with the name for the
 value of the key. The following command creates a secret <code class="docutils literal notranslate"><span class="pre">certificate</span></code> in Secret management service for storing
 host certificate and its key:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret put certificate cert=@hostcert.pem key=@hostkey.pem
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret put certificate <span class="nv">cert</span><span class="o">=</span>@hostcert.pem <span class="nv">key</span><span class="o">=</span>@hostkey.pem
 </pre></div>
 </div>
 <p>Users can get the certificate latter on the target VM as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret get certificate cert &gt; hostcert.pem
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret get certificate cert &gt; hostcert.pem
 $ fedcloud secret get certificate key  &gt; hostkey.pem
 </pre></div>
 </div>
@@ -162,16 +162,16 @@ so on. For larger datasets, please use permanent cloud storages.</p>
 <h2>Encrypted secrets<a class="headerlink" href="#encrypted-secrets" title="Permalink to this heading"></a></h2>
 <p>For highly-sensitive secrets, users can choose to encrypt the secret values before uploading it to the service. The
 encryption is done automatically on the fly if an encryption key (passphrase) is provided:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret put certificate cert=@hostcert.pem key=@hostkey.pem --encrypt-key my-pass-phrase
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret put certificate <span class="nv">cert</span><span class="o">=</span>@hostcert.pem <span class="nv">key</span><span class="o">=</span>@hostkey.pem --encrypt-key my-pass-phrase
 </pre></div>
 </div>
 <p>Decryption is done in a similar way, just by providing decryption key, the secret value will be decrypted
 automatically if the key is correct:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret get certificate cert --decrypt-key my-pass-phrase
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret get certificate cert --decrypt-key my-pass-phrase
 </pre></div>
 </div>
 <p>Users can verify what is stored in the Vault by reading the secrets without providing decryption key.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret get certificate cert
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret get certificate cert
 gAAAAAB...............................
 </pre></div>
 </div>
@@ -182,18 +182,18 @@ and give feedback and suggestions for improvements if possible.</p>
 <section id="export-and-import-secrets">
 <h2>Export and import secrets<a class="headerlink" href="#export-and-import-secrets" title="Permalink to this heading"></a></h2>
 <p>Users can print secrets to files YAML/JSON format for further processing by option <code class="docutils literal notranslate"><span class="pre">--output-format</span></code> or simply <code class="docutils literal notranslate"><span class="pre">-f</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret get my_app_secrets -f json
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret get my_app_secrets -f json
 
 $ fedcloud secret get my_app_secrets -f yaml &gt; my_app_secrets.yaml
 </pre></div>
 </div>
 <p>The secrets in YAML/JSON files can be imported back to the service by adding &quot;&#64;&quot; before filenames as parameters,
 telling client to read secrets from files:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret put my_second_app_secrets @my_app_secrets.yaml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret put my_second_app_secrets @my_app_secrets.yaml
 </pre></div>
 </div>
-<p>Note the difference in examples: <code class="docutils literal notranslate"><span class="pre">cert=&#64;hostcert.pem</span></code> for reading the file content as the value for the key <code class="docutils literal notranslate"><span class="pre">cert</span></code>,
-and <code class="docutils literal notranslate"><span class="pre">&#64;my_app_secrets.yaml</span></code> for reading whole key:value pairs from the YAML file.</p>
+<p>Note the difference in examples: <code class="docutils literal notranslate"><span class="pre">cert=&#64;hostcert.pem</span></code> for reading the content of the file <code class="docutils literal notranslate"><span class="pre">horstcert.pem</span></code> as the
+value for the key <code class="docutils literal notranslate"><span class="pre">cert</span></code>, and <code class="docutils literal notranslate"><span class="pre">&#64;my_app_secrets.yaml</span></code> for reading whole key:value pairs from the YAML file.</p>
 <p>As YAML format is simpler, it is expected by default unless the filename has <code class="docutils literal notranslate"><span class="pre">.json</span></code> extension. Try to export your
 secrets to both formats to see the differences between formats.</p>
 <p>Importing secrets in files in free text format &quot;key=value&quot; is not supported as the format is error-prone, especially
