@@ -1,3 +1,3 @@
 GitHub Pages of [fedcloud-eu/vault-doc](https://github.com/fedcloud-eu/vault-doc.git)
 ===
-Sphinx html documentation of [5f3f8c33](https://github.com/fedcloud-eu/vault-doc/tree/5f3f8c33d2336efa95a05f3951459febc50b8111)
+Sphinx html documentation of [c0da6c9c](https://github.com/fedcloud-eu/vault-doc/tree/c0da6c9cf602108e62ee9cf1903842a458b004be)

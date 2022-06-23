@@ -103,24 +103,30 @@ or <a class="reference external" href="https://indigo-dc.gitbook.io/oidc-agent/"
 </section>
 <section id="quickstart">
 <h2>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this heading"></a></h2>
+<p>Secret objects in Secret management service are identified by their paths, like files on disk. Each secret object may
+contain several secret items, each item is identified by its key. For example, a secret object for a service in Cloud
+may contain several different passwords for different components: database, webservice and so on. Secret objects in
+Secret management service are created, read, deleted as the whole, users cannot modify content of an existing secret.</p>
 <p>As FedCloud client is tightly integrated with Secret management service, no additional setting is required. Users can
 access the service immediately with simple commands:</p>
 <ul class="simple">
-<li><p>Create a secret <code class="docutils literal notranslate"><span class="pre">my_app_secrets</span></code> in Secret management service, store MySQL and admin passwords in the secret:</p></li>
+<li><p>Create a secret object <code class="docutils literal notranslate"><span class="pre">my_app_secrets</span></code> in Secret management service, store MySQL and admin passwords in the
+secret object:</p></li>
 </ul>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret put my_app_secrets <span class="nv">mysql_password</span><span class="o">=</span><span class="m">123456</span> <span class="nv">admin_password</span><span class="o">=</span>abcdef
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>List secrets stored in Secret management service:</p></li>
+<li><p>List secret objects stored in Secret management service:</p></li>
 </ul>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret list
 <span class="go">my_app_secrets</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>Get a secret from Secret management service. If a key is given, the client will print only the secret value stored
-in the key (useful for scripting), otherwise it will print the table of all key:value pairs.</p></li>
+<li><p>Read a secret object from Secret management service. If a key is given as parameter, the client will print only the
+secret value corresponding to the key (what is useful for scripting), otherwise it will print the table of all
+key:value pairs.</p></li>
 </ul>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get my_app_secrets
 <span class="go">key             value</span>
@@ -134,7 +140,7 @@ in the key (useful for scripting), otherwise it will print the table of all key:
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>Delete a secret from Secret management service.</p></li>
+<li><p>Delete a secret object from Secret management service.</p></li>
 </ul>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret delete my_app_secrets
 </pre></div>
@@ -143,8 +149,8 @@ in the key (useful for scripting), otherwise it will print the table of all key:
 <section id="secret-values-from-small-text-files">
 <h2>Secret values from small text files<a class="headerlink" href="#secret-values-from-small-text-files" title="Permalink to this heading"></a></h2>
 <p>If the value string is started with &quot;&#64;&quot;, the FedCloud client will read the content of the file with the name for the
-value of the key. The following command creates a secret <code class="docutils literal notranslate"><span class="pre">certificate</span></code> in Secret management service for storing
-host certificate and its key:</p>
+value of the key. The following command creates a secret object <code class="docutils literal notranslate"><span class="pre">certificate</span></code> in Secret management service for storing
+host certificate and host key:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret put certificate <span class="nv">cert</span><span class="o">=</span>@hostcert.pem <span class="nv">key</span><span class="o">=</span>@hostkey.pem
 </pre></div>
 </div>
@@ -153,52 +159,56 @@ host certificate and its key:</p>
 <span class="gp">$ </span>fedcloud secret get certificate key  &gt; hostkey.pem
 </pre></div>
 </div>
-<p>So far, only text files are supported. For binary files, it is recommended to use <code class="docutils literal notranslate"><span class="pre">uuencode</span></code> command for encoding
-the files as texts before uploading and <code class="docutils literal notranslate"><span class="pre">uudecode</span></code> for converting the content back to the original format.</p>
-<p>The limit of the secret size is 512kB, it is sufficient for storing tokens, certificates, configuration files and
-so on. For larger datasets, please use permanent cloud storages.</p>
+<p>So far, only values from text files are supported. For binary files, it is recommended to use <code class="docutils literal notranslate"><span class="pre">uuencode</span></code> command
+for encoding the files as texts before putting them to the service  and <code class="docutils literal notranslate"><span class="pre">uudecode</span></code> for converting the content back
+to the original format.</p>
+<p>The limit size of the secret object is 512kB, it is sufficient for storing tokens, certificates, configuration files
+and so on. For larger datasets, please use permanent cloud storages.</p>
 </section>
 <section id="encrypted-secrets">
 <h2>Encrypted secrets<a class="headerlink" href="#encrypted-secrets" title="Permalink to this heading"></a></h2>
-<p>For highly-sensitive secrets, users can choose to encrypt the secret values before uploading it to the service. The
+<p>For highly-sensitive secrets, users can choose to encrypt the secret values before putting them to the service. The
 encryption is done automatically on the fly if an encryption key (passphrase) is provided:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret put certificate <span class="nv">cert</span><span class="o">=</span>@hostcert.pem <span class="nv">key</span><span class="o">=</span>@hostkey.pem --encrypt-key my-pass-phrase
 </pre></div>
 </div>
-<p>Decryption is done in a similar way, just by providing decryption key, the secret value will be decrypted
+<p>Decryption is done in a similar way, just by providing decryption key when reading, the secret values will be decrypted
 automatically if the key is correct:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get certificate cert --decrypt-key my-pass-phrase
 </pre></div>
 </div>
-<p>Users can verify what is stored in the Vault by reading the secrets without providing decryption key.</p>
+<p>Users can verify what is actually stored in the Secret management service by reading the secret object without
+providing decryption key:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get certificate cert
 <span class="go">gAAAAAB...............................</span>
 </pre></div>
 </div>
-<p>The encryption is done by standard Python crytography library. Security experts are invited to review the code
-(available at <a class="reference external" href="https://github.com/tdviet/fedcloudclient/blob/master/fedcloudclient/secret.py#L124">GitHub</a>)
+<p>The encryption/decryption is done by standard Python crytography library. Security experts are invited to review
+the code (available at <a class="reference external" href="https://github.com/tdviet/fedcloudclient/blob/master/fedcloudclient/secret.py#L124">GitHub</a>)
 and give feedback and suggestions for improvements if possible.</p>
 </section>
 <section id="export-and-import-secrets">
 <h2>Export and import secrets<a class="headerlink" href="#export-and-import-secrets" title="Permalink to this heading"></a></h2>
-<p>Users can print secrets to files YAML/JSON format for further processing by option <code class="docutils literal notranslate"><span class="pre">--output-format</span></code> or simply <code class="docutils literal notranslate"><span class="pre">-f</span></code>:</p>
+<p>Users can print secret objects to files YAML/JSON format for further processing by option <code class="docutils literal notranslate"><span class="pre">--output-format</span></code>
+or simply <code class="docutils literal notranslate"><span class="pre">-f</span></code>:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get my_app_secrets -f json
 
 <span class="gp">$ </span>fedcloud secret get my_app_secrets -f yaml &gt; my_app_secrets.yaml
 </pre></div>
 </div>
-<p>The secrets in YAML/JSON files can be imported back to the service by adding &quot;&#64;&quot; before filenames as parameters,
-telling client to read secrets from files:</p>
+<p>The secret objects in YAML/JSON files can be imported back to the service by adding &quot;&#64;&quot; before filenames as parameters,
+telling client to read secret objects from files:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret put my_second_app_secrets @my_app_secrets.yaml
 </pre></div>
 </div>
 <p>Note the difference in examples: <code class="docutils literal notranslate"><span class="pre">cert=&#64;hostcert.pem</span></code> for reading the content of the file <code class="docutils literal notranslate"><span class="pre">horstcert.pem</span></code> as the
-value for the key <code class="docutils literal notranslate"><span class="pre">cert</span></code>, and <code class="docutils literal notranslate"><span class="pre">&#64;my_app_secrets.yaml</span></code> for reading whole key:value pairs from the YAML file.</p>
-<p>As YAML format is simpler, it is expected by default unless the filename has <code class="docutils literal notranslate"><span class="pre">.json</span></code> extension. Try to export your
-secrets to both formats to see the differences between formats.</p>
-<p>Importing secrets in files in free text format &quot;key=value&quot; is not supported as the format is error-prone, especially
-for multi-line secret values or values with special characters. Users can replace <code class="docutils literal notranslate"><span class="pre">=</span></code> to <code class="docutils literal notranslate"><span class="pre">:</span></code> for converting simple
-free text files to YAML format. Note that a blank space after <code class="docutils literal notranslate"><span class="pre">:</span></code> is required by YAML syntax.</p>
+value for the key <code class="docutils literal notranslate"><span class="pre">cert</span></code>, and <code class="docutils literal notranslate"><span class="pre">&#64;my_app_secrets.yaml</span></code> for reading whole secret object with all key:value pairs
+from the YAML file.</p>
+<p>As YAML format is a superset of JSON, it is expected by default unless the filename has <code class="docutils literal notranslate"><span class="pre">.json</span></code> extension. Try to
+export your secrets to both formats to see the differences between formats.</p>
+<p>Importing secret objects from files in free text format &quot;key=value&quot; is not supported as the format is error-prone,
+especially for multi-line secret values or values with special characters. Users can replace <code class="docutils literal notranslate"><span class="pre">=</span></code> to <code class="docutils literal notranslate"><span class="pre">:</span></code> for
+converting simple free text files to YAML format. Note that a blank space after <code class="docutils literal notranslate"><span class="pre">:</span></code> is required by YAML syntax.</p>
 </section>
 </section>
 
