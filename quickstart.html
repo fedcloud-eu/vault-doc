@@ -45,7 +45,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">User guides</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#prerequisite">Prerequisite</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#quickstart">Quickstart</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#secret-values-from-files">Secret values from files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#secret-values-from-small-files">Secret values from small files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#encrypted-secrets">Encrypted secrets</a></li>
 </ul>
 </li>
@@ -92,7 +92,8 @@ has simple syntax and also advanced features like encrypted secrets.</p>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>Valid access token from EGI Check-in, either from <a class="reference external" href="https://aai.egi.eu/token">EGI Check-in Token Portal</a>
+<li><p>Valid access token from EGI Check-in for authentication, either from
+<a class="reference external" href="https://aai.egi.eu/token">EGI Check-in Token Portal</a>
 or <a class="reference external" href="https://indigo-dc.gitbook.io/oidc-agent/">oidc-agent</a>, is set to environment variable:</p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export OIDC_ACCESS_TOKEN=&lt;ACCESS_TOKEN&gt;
@@ -104,30 +105,31 @@ or <a class="reference external" href="https://indigo-dc.gitbook.io/oidc-agent/"
 <p>As FedCloud client is tightly integrated with Secret management service, no additional setting is required. Users can
 access the service immediately with simple commands:</p>
 <ul class="simple">
-<li><p>Create a secret in Secret management service, with a name <code class="docutils literal notranslate"><span class="pre">my_first_secret</span></code>, store a string <code class="docutils literal notranslate"><span class="pre">My</span> <span class="pre">secret</span> <span class="pre">word</span></code> in
-the key <code class="docutils literal notranslate"><span class="pre">mykey</span></code>:</p></li>
+<li><p>Create a secret <code class="docutils literal notranslate"><span class="pre">my_app_secrets</span></code> in Secret management service, store MySQL and admin passwords in the secret:</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret put my_first_secret mykey=&quot;My secret word&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret put my_app_secrets mysql_password=123456 admin_password=abcdef
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>List secrets stored in Secret management service:</p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret list
-my_first_secret
+my_app_secrets
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>Get a secret from Secret management service. If a key is given, the client will print only the secret value stored
 in the key (useful for scripting), otherwise it will print the table of all key:value pairs.</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret get my_first_secret
-key    value
------  --------------
-mykey  My secret word
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret get my_app_secrets
+key             value
+--------------  -------
+admin_password  abcdef
+mysql_password  123456
 
-$ fedcloud secret get my_first_secret mykey
-My secret word
+
+$ fedcloud secret get my_app_secrets mysql_password
+123456
 </pre></div>
 </div>
 <ul class="simple">
@@ -137,22 +139,22 @@ My secret word
 </pre></div>
 </div>
 </section>
-<section id="secret-values-from-files">
-<h2>Secret values from files<a class="headerlink" href="#secret-values-from-files" title="Permalink to this heading"></a></h2>
+<section id="secret-values-from-small-files">
+<h2>Secret values from small files<a class="headerlink" href="#secret-values-from-small-files" title="Permalink to this heading"></a></h2>
 <p>If the value string is started with &quot;&#64;&quot;, the FedCloud client will read the content of the file with the name for the
-value for the key. The following command creates a secret in Secret management service with a name <code class="docutils literal notranslate"><span class="pre">certificate</span></code> and
-store host certificate and key in the secret:</p>
+value for the key. The following command creates a secret <code class="docutils literal notranslate"><span class="pre">certificate</span></code> in Secret management service for storing
+host certificate and its key:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret put certificate cert=@hostcert.pem key=@hostkey.pem
 </pre></div>
 </div>
-<p>Users can get the certificate on VM as follows:</p>
+<p>Users can get the certificate latter on the target VM as follows:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret get certificate cert &gt; hostcert.pem
 $ fedcloud secret get certificate key  &gt; hostkey.pem
 </pre></div>
 </div>
 <p>So far, only text files are supported. For binary files, it is recommended to use <code class="docutils literal notranslate"><span class="pre">uuencode</span></code> command for encoding
 the files as texts before uploading and <code class="docutils literal notranslate"><span class="pre">uudecode</span></code> for converting the content back to the original format.</p>
-<p>The limit of the secret size is 512kB, it is sufficient for storing certificates, service configuration files and
+<p>The limit of the secret size is 512kB, it is sufficient for storing tokens, certificates, configuration files and
 so on. For larger datasets, please use permanent cloud storages.</p>
 </section>
 <section id="encrypted-secrets">
