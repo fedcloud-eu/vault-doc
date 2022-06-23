@@ -141,5 +141,5 @@ As YAML format is simpler, it is expected by default unless the filename has ``.
 secrets to both formats to see the differences between formats.
 
 Importing secrets in files in free text format "key=value" is not supported as the format is error-prone, especially
-for multi-line secret values or values with special characters. Users can replace ``=`` to `` : `` for converting simple
-free text files to YAML format. Note the blank space after ``:`` required by YAML syntax.
+for multi-line secret values or values with special characters. Users can replace ``=`` to ``:`` for converting simple
+free text files to YAML format. Note that a blank space after ``:`` is required by YAML syntax.
