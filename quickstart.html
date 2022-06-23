@@ -136,7 +136,7 @@ $ fedcloud secret get my_app_secrets mysql_password
 <ul class="simple">
 <li><p>Delete a secret from Secret management service.</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret delete my_first_secret
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret delete my_app_secrets
 </pre></div>
 </div>
 </section>
@@ -192,13 +192,13 @@ telling client to read secrets from files:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret put my_second_app_secrets @my_app_secrets.yaml
 </pre></div>
 </div>
-<p>Note the difference in examples: <code class="docutils literal notranslate"><span class="pre">cert=&#64;hostcert.pem</span></code> for reading file content as value for the key <code class="docutils literal notranslate"><span class="pre">cert</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">&#64;my_app_secrets.yaml</span></code> for reading whole key:value pairs from YAML files.</p>
-<p>As YAML format is simpler, it is expected by default unless the filename has &quot;.json&quot; extension. Try to export your
+<p>Note the difference in examples: <code class="docutils literal notranslate"><span class="pre">cert=&#64;hostcert.pem</span></code> for reading the file content as the value for the key <code class="docutils literal notranslate"><span class="pre">cert</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">&#64;my_app_secrets.yaml</span></code> for reading whole key:value pairs from the YAML file.</p>
+<p>As YAML format is simpler, it is expected by default unless the filename has <code class="docutils literal notranslate"><span class="pre">.json</span></code> extension. Try to export your
 secrets to both formats to see the differences between formats.</p>
 <p>Importing secrets in files in free text format &quot;key=value&quot; is not supported as the format is error-prone, especially
-for multi-line secret values or values with special characters. Users can replace &quot;=&quot; to &quot; : &quot; for converting simple
-free text files to YAML format. Note the blank space after &quot;:&quot; required by YAML syntax.</p>
+for multi-line secret values or values with special characters. Users can replace <code class="docutils literal notranslate"><span class="pre">=</span></code> to `` : `` for converting simple
+free text files to YAML format. Note the blank space after <code class="docutils literal notranslate"><span class="pre">:</span></code> required by YAML syntax.</p>
 </section>
 </section>
 

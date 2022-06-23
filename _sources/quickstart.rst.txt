@@ -61,7 +61,7 @@ access the service immediately with simple commands:
 
 ::
 
-    $ fedcloud secret delete my_first_secret
+    $ fedcloud secret delete my_app_secrets
 
 
 Secret values from small text files
@@ -134,12 +134,12 @@ telling client to read secrets from files:
 
     $ fedcloud secret put my_second_app_secrets @my_app_secrets.yaml
 
-Note the difference in examples: ``cert=@hostcert.pem`` for reading file content as value for the key ``cert``, and
-``@my_app_secrets.yaml`` for reading whole key:value pairs from YAML files.
+Note the difference in examples: ``cert=@hostcert.pem`` for reading the file content as the value for the key ``cert``,
+and ``@my_app_secrets.yaml`` for reading whole key:value pairs from the YAML file.
 
-As YAML format is simpler, it is expected by default unless the filename has ".json" extension. Try to export your
+As YAML format is simpler, it is expected by default unless the filename has ``.json`` extension. Try to export your
 secrets to both formats to see the differences between formats.
 
 Importing secrets in files in free text format "key=value" is not supported as the format is error-prone, especially
-for multi-line secret values or values with special characters. Users can replace "=" to " : " for converting simple
-free text files to YAML format. Note the blank space after ":" required by YAML syntax.
+for multi-line secret values or values with special characters. Users can replace ``=`` to `` : `` for converting simple
+free text files to YAML format. Note the blank space after ``:`` required by YAML syntax.
