@@ -9,7 +9,7 @@ has simple syntax and also advanced features like encrypted secrets.
 Prerequisite
 ************
 
-.. highlight:: shell
+.. highlight:: bash
 
 * The latest version of FedCloud client (1.2.18 and higher) is installed. If not, install or upgrade the client:
 
