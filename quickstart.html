@@ -106,7 +106,7 @@ or <a class="reference external" href="https://indigo-dc.gitbook.io/oidc-agent/"
 <p>As FedCloud client is tightly integrated with Secret management service, no additional setting is required. Users can
 access the service immediately with simple commands:</p>
 <ul class="simple">
-<li><p>Create a secret <a href="#id1"><span class="problematic" id="id2">:console:`my_app_secrets`</span></a> in Secret management service, store MySQL and admin passwords in the secret:</p></li>
+<li><p>Create a secret <code class="docutils literal notranslate"><span class="pre">my_app_secrets</span></code> in Secret management service, store MySQL and admin passwords in the secret:</p></li>
 </ul>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret put my_app_secrets <span class="nv">mysql_password</span><span class="o">=</span><span class="m">123456</span> <span class="nv">admin_password</span><span class="o">=</span>abcdef
 </pre></div>
@@ -143,7 +143,7 @@ in the key (useful for scripting), otherwise it will print the table of all key:
 <section id="secret-values-from-small-text-files">
 <h2>Secret values from small text files<a class="headerlink" href="#secret-values-from-small-text-files" title="Permalink to this heading"></a></h2>
 <p>If the value string is started with &quot;&#64;&quot;, the FedCloud client will read the content of the file with the name for the
-value of the key. The following command creates a secret <cite>certificate</cite> in Secret management service for storing
+value of the key. The following command creates a secret <code class="docutils literal notranslate"><span class="pre">certificate</span></code> in Secret management service for storing
 host certificate and its key:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret put certificate <span class="nv">cert</span><span class="o">=</span>@hostcert.pem <span class="nv">key</span><span class="o">=</span>@hostkey.pem
 </pre></div>
