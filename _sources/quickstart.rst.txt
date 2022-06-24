@@ -81,7 +81,7 @@ access the service immediately with simple commands without understanding detail
 Secret values from small text files
 ***********************************
 
-If the value string is started with "@", the FedCloud client will read the content of the file with the name for the
+If the value string is started with ``@``, the FedCloud client will read the content of the file with the name for the
 value of the key. The following command creates a secret object ``certificate`` in Secret management service for storing
 host certificate and host key:
 
@@ -144,7 +144,7 @@ or simply ``-f``:
 
     $ fedcloud secret get my_app_secrets -f yaml > my_app_secrets.yaml
 
-The secret objects in YAML/JSON files can be imported back to the service by adding "@" before filenames as parameters,
+The secret objects in YAML/JSON files can be imported back to the service by adding ``@`` before filenames as parameters,
 telling client to read secret objects from files:
 
 ::
@@ -159,6 +159,6 @@ from the YAML file.
 As YAML format is a superset of JSON, it is expected by default unless the filename has ``.json`` extension. Try to
 export your secrets to both formats to see the differences between formats.
 
-Importing secret objects from files in free text format "key=value" is not supported as the format is error-prone,
+Importing secret objects from files in free text format ``key=value`` is not supported as the format is error-prone,
 especially for multi-line secret values or values with special characters. Users can replace ``=`` to ``:`` for
 converting simple free text files to YAML format. Note that a blank space after ``:`` is required by YAML syntax.

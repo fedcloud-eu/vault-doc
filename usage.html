@@ -88,24 +88,24 @@ service.</p>
 <ul class="simple">
 <li><p>Open <a class="reference external" href="https://vault.services.fedcloud.eu:8200">https://vault.services.fedcloud.eu:8200</a> in your browser.</p></li>
 <li><p>Choose OIDC authentication method in the pulldown menu, and click on the button
-<em>“Sign in with OIDC provider”</em></p></li>
+<code class="docutils literal notranslate"><span class="pre">Sign</span> <span class="pre">in</span> <span class="pre">with</span> <span class="pre">OIDC</span> <span class="pre">provider</span></code></p></li>
 </ul>
 <a class="reference internal image-reference" href="_images/vault-login-oidc.png"><img alt="Vault login via OIDC" src="_images/vault-login-oidc.png" style="width: 640px;" /></a>
 <ul class="simple">
 <li><p>Login via EGI Check-in and authorize the Vault GUI.</p></li>
-<li><p>You have logged into the Vault GUI. Each user has a private secret space, a “home directory” in
-the secret engine “secrets”, with EGI Check-in ID as the folder name.</p></li>
+<li><p>You have logged into the Vault GUI. Each user has a private secret space, a &quot;home directory&quot; in
+the secret engine <code class="docutils literal notranslate"><span class="pre">secrets</span></code>, with EGI Check-in ID as the folder name.</p></li>
 </ul>
 <a class="reference internal image-reference" href="_images/vault-main-window.png"><img alt="Vault main window" src="_images/vault-main-window.png" style="width: 640px;" /></a>
 <ul class="simple">
-<li><p>The “home directory” is not created automatically, so for the first time login, you may have to
-create it. In the “secrets” folder, click on “Create secret” on the right side of your screen and
-create a new secret with a path starting with your EGI Check-in ID (“e0b6.…&#64;egi.eu” in the
+<li><p>The &quot;home directory&quot; is not created automatically, so for the first time login, you may have to
+create it. In the <code class="docutils literal notranslate"><span class="pre">secrets</span></code> folder, click on <code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">secret</span></code> on the right side of your screen and
+create a new secret with a path starting with your EGI Check-in ID (<code class="docutils literal notranslate"><span class="pre">e0b6.…&#64;egi.eu</span></code> in the
 screenshot)</p></li>
 </ul>
 <a class="reference internal image-reference" href="_images/vault-create-secret.png"><img alt="Vault main window" src="_images/vault-create-secret.png" style="width: 1200px;" /></a>
 <ul class="simple">
-<li><p>Your “home directory” will be created together with your first secret. Click on “secrets” folder,
+<li><p>Your &quot;home directory&quot; will be created together with your first secret. Click on <code class="docutils literal notranslate"><span class="pre">secrets</span></code> folder,
 then your ID in the EGI Check-in to enter your private secret space, then browse/view/edit your
 secrets</p></li>
 </ul>
@@ -124,7 +124,7 @@ different OS.</p></li>
 <li><p>Get your EGI Check-in access token (e.g. from <a class="reference external" href="https://aai.egi.eu/token/">https://aai.egi.eu/token/</a> or oidc-agent)
 and set it to an environment variable:</p></li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span> <span class="nv">ACCESS_TOKEN</span><span class="o">=</span>”ADD_YOUR_ACCESS_TOKEN_HERE”
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span> <span class="nv">ACCESS_TOKEN</span><span class="o">=</span><span class="s2">&quot;ADD_YOUR_ACCESS_TOKEN_HERE&quot;</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -137,10 +137,10 @@ and set it to an environment variable:</p></li>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>The command will return a Vault’s token in the form “token   s.XXXXXXXXXXXXXXXXX”. Save the token
+<li><p>The command will return a Vault’s token in the form <code class="docutils literal notranslate"><span class="pre">token</span>&#160;&#160; <span class="pre">s.XXXXXXXXXXXXXXXXX</span></code>. Save the token
 to an environment variable and use it for manipulation with secrets in Vault</p></li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span> <span class="nv">VAULT_TOKEN</span><span class="o">=</span>”s.XXXXXXXXXXXXXX”
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span> <span class="nv">VAULT_TOKEN</span><span class="o">=</span><span class="s2">&quot;s.XXXXXXXXXXXXXX&quot;</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -150,13 +150,13 @@ to an environment variable and use it for manipulation with secrets in Vault</p>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>List secrets in your “home directory”. VAULT_ADDR and VAULT_TOKEN must be set:</p></li>
+<li><p>List secrets in your &quot;home directory&quot;. VAULT_ADDR and VAULT_TOKEN must be set:</p></li>
 </ul>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>vault list <span class="nv">$VAULT_HOME</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>Create a new secret with name “test” in your “home directory”, store value “value1” in key “key1”:</p></li>
+<li><p>Create a new secret with name <code class="docutils literal notranslate"><span class="pre">test</span></code> in your &quot;home directory&quot;, store value <code class="docutils literal notranslate"><span class="pre">value1</span></code> in key <code class="docutils literal notranslate"><span class="pre">key1</span></code>:</p></li>
 </ul>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>vault write <span class="nv">$VAULT_HOME</span>/test <span class="nv">key1</span><span class="o">=</span>value1
 </pre></div>
@@ -171,7 +171,7 @@ to an environment variable and use it for manipulation with secrets in Vault</p>
 <span class="go">key1                value1</span>
 </pre></div>
 </div>
-<p>There are alternative commands “kv put”, “kv get” for “write”, “read”. The full list of Vault
+<p>There are alternative commands <code class="docutils literal notranslate"><span class="pre">kv</span> <span class="pre">put</span></code>, <code class="docutils literal notranslate"><span class="pre">kv</span> <span class="pre">get</span></code> for <code class="docutils literal notranslate"><span class="pre">write</span></code>, <code class="docutils literal notranslate"><span class="pre">read</span></code>. The full list of Vault
 commands is available at <a class="reference external" href="https://www.vaultproject.io/docs/commands">https://www.vaultproject.io/docs/commands</a></p>
 </section>
 <section id="using-vault-via-rest-api-or-external-clients">
