@@ -6,6 +6,15 @@ many client tools and libraries. However, using Secret management service via Fe
 as the client is tightly integrated with the service, it works out of the box without additional configuration,
 has simple syntax and also advanced features like encrypted secrets.
 
+Concepts of Secret objects
+**************************
+
+Secret objects in Secret management service are identified by their paths, like files on disk. Each user has a private
+secret space for storing his secret objects and cannot see secret objects from other users. Each secret object may
+contain several secret items, each item is identified by its key. For example, a secret object for a service in Cloud
+may contain several different passwords for different components: database, webservice and so on. Secret objects in
+Secret management service are created, read, deleted as the whole, users cannot modify content of an existing secret.
+
 Prerequisite
 ************
 
@@ -28,13 +37,9 @@ Prerequisite
 Quickstart
 **********
 
-Secret objects in Secret management service are identified by their paths, like files on disk. Each secret object may
-contain several secret items, each item is identified by its key. For example, a secret object for a service in Cloud
-may contain several different passwords for different components: database, webservice and so on. Secret objects in
-Secret management service are created, read, deleted as the whole, users cannot modify content of an existing secret.
-
 As FedCloud client is tightly integrated with Secret management service, no additional setting is required. Users can
-access the service immediately with simple commands:
+access the service immediately with simple commands without understanding details described in the Section
+`Service design and implementation <https://vault.docs.fedcloud.eu/design.html>`_. There is a quickstart:
 
 * Create a secret object ``my_app_secrets`` in Secret management service, store MySQL and admin passwords in the
   secret object:
