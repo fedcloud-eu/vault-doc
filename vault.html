@@ -79,8 +79,10 @@
              
   <section id="using-secret-management-service-via-vault-s-gui-and-client">
 <h1>Using Secret management service via Vault's GUI and client<a class="headerlink" href="#using-secret-management-service-via-vault-s-gui-and-client" title="Permalink to this heading"></a></h1>
-<p>Although using Secret management service via FedCloud client is strongly recommended, the service is fully compatible
-with Vault and can be used via the web-based GUI or Vault's native client tool and libraries. The native client tool is
+<p>Although using Secret management service via <a class="reference external" href="https://fedcloudclient.fedcloud.eu/">FedCloud client</a>
+is strongly recommended, the service is fully compatible
+with <a class="reference external" href="https://www.vaultproject.io/">Hashicorp’s Vault</a> and can be used via the web-based GUI or Vault's native
+client tool and libraries. The native client tool is
 more complicated but it has some functionalities not offered by FedCloud client, e.g. token renew. The compatibility
 also enable integration of existing services and applications that are already using Vault, to the Secret management
 service.</p>
@@ -122,7 +124,8 @@ different OS.</p></li>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>Get your EGI Check-in access token (e.g. from <a class="reference external" href="https://aai.egi.eu/token/">https://aai.egi.eu/token/</a> or oidc-agent)
+<li><p>Get your EGI Check-in access token (e.g. from <a class="reference external" href="https://aai.egi.eu/token">EGI Check-in Token Portal</a> or
+<a class="reference external" href="https://indigo-dc.gitbook.io/oidc-agent/">oidc-agent</a>)
 and set it to an environment variable:</p></li>
 </ul>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span> <span class="nv">ACCESS_TOKEN</span><span class="o">=</span><span class="s2">&quot;ADD_YOUR_ACCESS_TOKEN_HERE&quot;</span>
