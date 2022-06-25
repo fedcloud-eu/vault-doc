@@ -49,6 +49,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#secret-values-from-small-text-files">Secret values from small text files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#encrypted-secrets">Encrypted secrets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#export-and-import-secrets">Export and import secrets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modifying-existing-secrets">Modifying existing secrets</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Using Secret management service via Vault's GUI and client</a></li>
@@ -89,9 +90,10 @@ has simple syntax and also advanced features like encrypted secrets.</p>
 <h2>Concepts of Secret objects<a class="headerlink" href="#concepts-of-secret-objects" title="Permalink to this heading"></a></h2>
 <p>Secret objects in Secret management service are identified by their paths, like files on disk. Each user has a private
 secret space for storing his secret objects and cannot see secret objects from other users. Each secret object may
-contain several secret items, each item is identified by its key. For example, a secret object for a service in Cloud
+contain several secret values, each value is identified by its key. For example, a secret object for a service in Cloud
 may contain several different passwords for different components: database, webservice and so on. Secret objects in
-Secret management service are created, read, deleted as the whole, users cannot modify content of an existing secret.</p>
+Secret management service are created, retrieved, deleted as the whole, users cannot edit individual secret values of an
+existing secret.</p>
 </section>
 <section id="prerequisite">
 <h2>Prerequisite<a class="headerlink" href="#prerequisite" title="Permalink to this heading"></a></h2>
@@ -215,6 +217,27 @@ export your secrets to both formats to see the differences between formats.</p>
 <p>Importing secret objects from files in free text format <code class="docutils literal notranslate"><span class="pre">key=value</span></code> is not supported as the format is error-prone,
 especially for multi-line secret values or values with special characters. Users can replace <code class="docutils literal notranslate"><span class="pre">=</span></code> to <code class="docutils literal notranslate"><span class="pre">:</span></code> for
 converting simple free text files to YAML format. Note that a blank space after <code class="docutils literal notranslate"><span class="pre">:</span></code> is required by YAML syntax.</p>
+</section>
+<section id="modifying-existing-secrets">
+<h2>Modifying existing secrets<a class="headerlink" href="#modifying-existing-secrets" title="Permalink to this heading"></a></h2>
+<p>As mentioned in the Concepts above, secret values in secret objects cannot be edited. However, users can get the
+contents of existing secret objects, change them locally and put the new contents back to the service. For examples:</p>
+<ul class="simple">
+<li><p>Adding new secret values to an existing secret object:</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get certificate -f json &gt; certificate.json
+
+<span class="gp">$ </span>fedcloud secret put certificate @certificate.json <span class="nv">another_cert</span><span class="o">=</span>@usercert.pem <span class="nv">another_key</span><span class="o">=</span>@userkey.pem
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Deleting secret values in an existing secret object:</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get certificate -f json <span class="p">|</span> jq <span class="s1">&#39;del (.another_cert, .another_key)&#39;</span> &gt; certificate.json
+
+<span class="gp">$ </span>fedcloud secret put certificate @certificate.json
+</pre></div>
+</div>
 </section>
 </section>
 
