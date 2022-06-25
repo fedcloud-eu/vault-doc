@@ -167,8 +167,9 @@ converting simple free text files to YAML format. Note that a blank space after 
 Modifying existing secrets
 **************************
 
-As mentioned in the Concepts above, secret values in secret objects cannot be edited. However, users can get the
-contents of existing secret objects, change them locally, then put the new contents back to the service. For examples:
+As mentioned in the Concepts above, secret values in secret objects cannot be edited individually in the service.
+However, users can get the contents of existing secret objects, change them locally, then put the new contents
+back to the service. For examples:
 
 * Adding new secret values to an existing secret object:
 
