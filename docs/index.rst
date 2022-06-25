@@ -14,6 +14,7 @@ https://vault.services.fedcloud.eu:8200.
    intro
    quickstart
    usage
+   vault
    design
 
 
