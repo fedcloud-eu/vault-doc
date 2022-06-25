@@ -11,9 +11,10 @@ Concepts of Secret objects
 
 Secret objects in Secret management service are identified by their paths, like files on disk. Each user has a private
 secret space for storing his secret objects and cannot see secret objects from other users. Each secret object may
-contain several secret items, each item is identified by its key. For example, a secret object for a service in Cloud
+contain several secret values, each value is identified by its key. For example, a secret object for a service in Cloud
 may contain several different passwords for different components: database, webservice and so on. Secret objects in
-Secret management service are created, read, deleted as the whole, users cannot modify content of an existing secret.
+Secret management service are created, retrieved, deleted as the whole, users cannot edit individual secret values of an
+existing secret.
 
 Prerequisite
 ************
@@ -162,3 +163,25 @@ export your secrets to both formats to see the differences between formats.
 Importing secret objects from files in free text format ``key=value`` is not supported as the format is error-prone,
 especially for multi-line secret values or values with special characters. Users can replace ``=`` to ``:`` for
 converting simple free text files to YAML format. Note that a blank space after ``:`` is required by YAML syntax.
+
+Modifying existing secrets
+**************************
+
+As mentioned in the Concepts above, secret values in secret objects cannot be edited. However, users can get the
+contents of existing secret objects, change them locally and put the new contents back to the service. For examples:
+
+* Adding new secret values to an existing secret object:
+
+::
+
+    $ fedcloud secret get certificate -f json > certificate.json
+
+    $ fedcloud secret put certificate @certificate.json another_cert=@usercert.pem another_key=@userkey.pem
+
+* Deleting secret values in an existing secret object:
+
+::
+
+    $ fedcloud secret get certificate -f json | jq 'del (.another_cert, .another_key)' > certificate.json
+
+    $ fedcloud secret put certificate @certificate.json
