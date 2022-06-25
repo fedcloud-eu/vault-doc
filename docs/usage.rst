@@ -23,7 +23,8 @@ Prerequisite
 
 .. highlight:: console
 
-* The latest version of FedCloud client (1.2.18 and higher) is installed. If not, install or upgrade the client:
+* The latest version of `FedCloud client <https://fedcloudclient.fedcloud.eu/>`_
+  (1.2.18 and higher) is installed. If not, install or upgrade the client:
 
 ::
 

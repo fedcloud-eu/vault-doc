@@ -1,8 +1,10 @@
 Using Secret management service via Vault's GUI and client
 ==========================================================
 
-Although using Secret management service via FedCloud client is strongly recommended, the service is fully compatible
-with Vault and can be used via the web-based GUI or Vault's native client tool and libraries. The native client tool is
+Although using Secret management service via `FedCloud client <https://fedcloudclient.fedcloud.eu/>`_
+is strongly recommended, the service is fully compatible
+with `Hashicorp’s Vault <https://www.vaultproject.io/>`_ and can be used via the web-based GUI or Vault's native
+client tool and libraries. The native client tool is
 more complicated but it has some functionalities not offered by FedCloud client, e.g. token renew. The compatibility
 also enable integration of existing services and applications that are already using Vault, to the Secret management
 service.
@@ -56,7 +58,8 @@ Using Secret management service via Vault CLI and access token
     $ export VAULT_ADDR=https://vault.services.fedcloud.eu:8200
 
 
-* Get your EGI Check-in access token (e.g. from https://aai.egi.eu/token/ or oidc-agent)
+* Get your EGI Check-in access token (e.g. from `EGI Check-in Token Portal <https://aai.egi.eu/token>`_ or
+  `oidc-agent <https://indigo-dc.gitbook.io/oidc-agent/>`_)
   and set it to an environment variable:
 
 ::
