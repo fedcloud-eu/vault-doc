@@ -1,7 +1,9 @@
 Quickstart
 ==========
 
-Just install FedCloud client, get an access token and you can use Secret management service. No additional setting
+Just install the latest version of `FedCloud client <https://fedcloudclient.fedcloud.eu/>`_,
+get an access token from `EGI Check-in Token Portal <https://aai.egi.eu/token>`_
+and you can use Secret management service. No additional setting
 required. The basic commands are as follows:
 
 * Create a secret object ``my_app_secrets`` in Secret management service, store MySQL and admin passwords in the
