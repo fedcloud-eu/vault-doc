@@ -1,125 +1,196 @@
-Using Secret management service via Vault's GUI and client
-==========================================================
+User guides
+===========
 
-Although using Secret management service via FedCloud client is strongly recommended, the service is fully compatible
-with Vault and can be used via the web-based GUI or Vault's native client tool and libraries. The native client tool is
-more complicated but it has some functionalities not offered by FedCloud client, e.g. token renew. The compatibility
-also enable integration of existing services and applications that are already using Vault, to the Secret management
-service.
+Secret management service is implemented on the base of Hashicorp’s Vault which has web-based GUI and is supported by
+many client tools and libraries. However, using Secret management service via FedCloud client is strongly recommended
+as the client is tightly integrated with the service, it works out of the box without additional configuration,
+has simple syntax and also advanced features like encrypted secrets.
 
-Using Secret management service via web-based GUI
-*************************************************
+Concepts of Secret objects
+**************************
 
-* Open https://vault.services.fedcloud.eu:8200 in your browser.
+Secret objects in Secret management service are identified by their paths, like files on disk. Each user has a private
+secret space for storing his secret objects and cannot see secret objects from other users. Each secret object may
+contain several secret values, each value is identified by its key. For example, a secret object for a service in Cloud
+may contain several different passwords for different components: database, webservice and so on. Secret objects in
+Secret management service are created, retrieved, deleted as the whole, users cannot edit individual secret values of an
+existing secret.
 
-* Choose OIDC authentication method in the pulldown menu, and click on the button
-  ``Sign in with OIDC provider``
-
-.. image:: images/vault-login-oidc.png
-  :width: 640
-  :alt: Vault login via OIDC
-
-* Login via EGI Check-in and authorize the Vault GUI.
-
-* You have logged into the Vault GUI. Each user has a private secret space, a "home directory" in
-  the secret engine ``secrets``, with EGI Check-in ID as the folder name.
-
-.. image:: images/vault-main-window.png
-  :width: 640
-  :alt: Vault main window
-
-* The "home directory" is not created automatically, so for the first time login, you may have to
-  create it. In the ``secrets`` folder, click on ``Create secret`` on the right side of your screen and
-  create a new secret with a path starting with your EGI Check-in ID (``e0b6.…@egi.eu`` in the
-  screenshot)
-
-.. image:: images/vault-create-secret.png
-  :width: 1200
-  :alt: Vault main window
-
-* Your "home directory" will be created together with your first secret. Click on ``secrets`` folder,
-  then your ID in the EGI Check-in to enter your private secret space, then browse/view/edit your
-  secrets
-
-Using Secret management service via Vault CLI and access token
-**************************************************************
+Prerequisite
+************
 
 .. highlight:: console
 
-* Install Vault CLI  if needed. See https://www.vaultproject.io/downloads for downloading Vault for
-  different OS.
-
-* Set environment for URL of Vault server:
+* The latest version of FedCloud client (1.2.18 and higher) is installed. If not, install or upgrade the client:
 
 ::
 
-    $ export VAULT_ADDR=https://vault.services.fedcloud.eu:8200
+    $ pip3 install -U fedcloudclient
 
-
-* Get your EGI Check-in access token (e.g. from https://aai.egi.eu/token/ or oidc-agent)
-  and set it to an environment variable:
-
-::
-
-    $ export ACCESS_TOKEN="ADD_YOUR_ACCESS_TOKEN_HERE"
-
-
-* Login to Vault using access tokens:
+* Valid access token from EGI Check-in for authentication, either from
+  `EGI Check-in Token Portal <https://aai.egi.eu/token>`_
+  or `oidc-agent <https://indigo-dc.gitbook.io/oidc-agent/>`_, is set to environment variable:
 
 ::
 
-    $ vault write auth/jwt/login jwt=$ACCESS_TOKEN
-    Key                  Value
-    ---                  -----
-    token                s.XXXXXXXXXXXXXXXXXXXXXXX
+    $ export OIDC_ACCESS_TOKEN=<ACCESS_TOKEN>
 
-* The command will return a Vault’s token in the form ``token   s.XXXXXXXXXXXXXXXXX``. Save the token
-  to an environment variable and use it for manipulation with secrets in Vault
+Basic usage
+***********
 
-::
+As FedCloud client is tightly integrated with Secret management service, no additional setting is required. Users can
+access the service immediately with simple commands without understanding details described in the Section
+`Service design and implementation <https://vault.docs.fedcloud.eu/design.html>`_. There is a quickstart:
 
-    $ export VAULT_TOKEN="s.XXXXXXXXXXXXXX"
-
-
-* For convenience, set your Vault’s home path to an environment variable
+* Create a secret object ``my_app_secrets`` in Secret management service, store MySQL and admin passwords in the
+  secret object:
 
 ::
 
-    $ export VAULT_HOME=/secrets/YOUR_CHECKIN_ID@egi.eu/
+    $ fedcloud secret put my_app_secrets mysql_password=123456 admin_password=abcdef
 
-
-* List secrets in your "home directory". VAULT_ADDR and VAULT_TOKEN must be set:
-
-::
-
-    $ vault list $VAULT_HOME
-
-
-* Create a new secret with name ``test`` in your "home directory", store value ``value1`` in key ``key1``:
+* List secret objects stored in Secret management service:
 
 ::
 
-    $ vault write $VAULT_HOME/test key1=value1
+    $ fedcloud secret list
+    my_app_secrets
 
-* Read your secret:
+* Read a secret object from Secret management service. If a key is given as parameter, the client will print only the
+  secret value corresponding to the key (what is useful for scripting), otherwise it will print the table of all
+  key:value pairs.
 
 ::
 
-    $ vault read $VAULT_HOME/test
-    Key                 Value
-    ---                 -----
-    refresh_interval    768h
-    key1                value1
+    $ fedcloud secret get my_app_secrets
+    key             value
+    --------------  -------
+    admin_password  abcdef
+    mysql_password  123456
 
 
-There are alternative commands ``kv put``, ``kv get`` for ``write``, ``read``. The full list of Vault
-commands is available at https://www.vaultproject.io/docs/commands
+    $ fedcloud secret get my_app_secrets mysql_password
+    123456
 
-Using Vault via REST API or external clients
-********************************************
+* Delete a secret object from Secret management service.
 
-Vault has a REST API with similar inputs like the CLI. There is a long list of libraries and external
-clients/tools for accessing secrets in Vault. See https://www.vaultproject.io/api or
-https://www.vaultproject.io/api-docs/relatedtools for more details.
+::
+
+    $ fedcloud secret delete my_app_secrets
 
 
+Secret values from small text files
+***********************************
+
+If the value string is started with ``@``, the FedCloud client will read the content of the file with the name for the
+value of the key. The following command creates a secret object ``certificate`` in Secret management service for storing
+host certificate and host key:
+
+::
+
+    $ fedcloud secret put certificate cert=@hostcert.pem key=@hostkey.pem
+
+Users can get the certificate latter on the target VM as follows:
+
+::
+
+    $ fedcloud secret get certificate cert > hostcert.pem
+    $ fedcloud secret get certificate key  > hostkey.pem
+
+So far, only values from text files are supported. For binary files, it is recommended to use ``uuencode`` command
+for encoding the files as texts before putting them to the service  and ``uudecode`` for converting the content back
+to the original format.
+
+The limit size of the secret object is 512kB, it is sufficient for storing tokens, certificates, configuration files
+and so on. For larger datasets, please use permanent cloud storages.
+
+Encrypted secrets
+*****************
+
+For highly-sensitive secrets, users can choose to encrypt the secret values before putting them to the service. The
+encryption is done automatically on the fly if an encryption key (passphrase) is provided:
+
+::
+
+    $ fedcloud secret put certificate cert=@hostcert.pem key=@hostkey.pem --encrypt-key my-pass-phrase
+
+Decryption is done in a similar way, just by providing decryption key when reading, the secret values will be decrypted
+automatically if the key is correct:
+
+::
+
+    $ fedcloud secret get certificate cert --decrypt-key my-pass-phrase
+
+Users can verify what is actually stored in the Secret management service by reading the secret object without
+providing decryption key:
+
+::
+
+    $ fedcloud secret get certificate cert
+    gAAAAAB...............................
+
+The encryption/decryption is done by standard Python crytography library. Security experts are invited to review
+the code (available at `GitHub <https://github.com/tdviet/fedcloudclient/blob/master/fedcloudclient/secret.py#L124>`_)
+and give feedback and suggestions for improvements if possible.
+
+Export and import secrets
+*************************
+
+Users can print secret objects to files YAML/JSON format for further processing by option ``--output-format``
+or simply ``-f``:
+
+::
+
+    $ fedcloud secret get my_app_secrets -f json
+
+    $ fedcloud secret get my_app_secrets -f yaml > my_app_secrets.yaml
+
+The secret objects in YAML/JSON files can be imported back to the service by adding ``@`` before filenames as parameters,
+telling client to read secret objects from files:
+
+::
+
+    $ fedcloud secret put my_second_app_secrets @my_app_secrets.yaml
+
+
+Note the difference in examples: ``cert=@hostcert.pem`` for reading the content of the file ``horstcert.pem`` as the
+value for the key ``cert``, and ``@my_app_secrets.yaml`` for reading whole secret object with all key:value pairs
+from the YAML file.
+
+As YAML format is a superset of JSON, it is expected by default unless the filename has ``.json`` extension. Try to
+export your secrets to both formats to see the differences between formats.
+
+Importing secret objects from files in free text format ``key=value`` is not supported as the format is error-prone,
+especially for multi-line secret values or values with special characters. Users can replace ``=`` to ``:`` for
+converting simple free text files to YAML format. Note that a blank space after ``:`` is required by YAML syntax.
+
+Modifying existing secrets
+**************************
+
+As mentioned in the Concepts above, secret values in secret objects cannot be edited individually in the service.
+However, users can get the contents of existing secret objects, change them locally, then put the new contents
+back to the service. For examples:
+
+* Adding new secret values to an existing secret object:
+
+::
+
+    $ fedcloud secret get certificate -f json > certificate.json
+
+    $ fedcloud secret put certificate @certificate.json another_cert=@usercert.pem another_key=@userkey.pem
+
+* Deleting secret values in an existing secret object:
+
+::
+
+    $ fedcloud secret get certificate -f json | jq 'del (.another_cert, .another_key)' > certificate.json
+
+    $ fedcloud secret put certificate @certificate.json
+
+* Updating secret values in an existing secret object:
+
+::
+
+    $ fedcloud secret get certificate -f json > certificate.json
+
+    $ fedcloud secret put certificate @certificate.json cert=@new_hostcert.pem key=@new_hostkey.pem

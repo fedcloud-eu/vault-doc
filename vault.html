@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Using Secret management service via Vault&#39;s GUI and client &mdash; Vault-doc  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Service design and implementation" href="design.html" />
+    <link rel="prev" title="User guides" href="usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html">
+            <img src="_static/vault-logo-small.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">User guides</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using Secret management service via Vault's GUI and client</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#using-secret-management-service-via-web-based-gui">Using Secret management service via web-based GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-secret-management-service-via-vault-cli-and-access-token">Using Secret management service via Vault CLI and access token</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-vault-via-rest-api-or-external-clients">Using Vault via REST API or external clients</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">Service design and implementation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Vault-doc</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Using Secret management service via Vault's GUI and client</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/fedcloud-eu/vault-doc/blob/master/docs/vault.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="using-secret-management-service-via-vault-s-gui-and-client">
+<h1>Using Secret management service via Vault's GUI and client<a class="headerlink" href="#using-secret-management-service-via-vault-s-gui-and-client" title="Permalink to this heading"></a></h1>
+<p>Although using Secret management service via FedCloud client is strongly recommended, the service is fully compatible
+with Vault and can be used via the web-based GUI or Vault's native client tool and libraries. The native client tool is
+more complicated but it has some functionalities not offered by FedCloud client, e.g. token renew. The compatibility
+also enable integration of existing services and applications that are already using Vault, to the Secret management
+service.</p>
+<section id="using-secret-management-service-via-web-based-gui">
+<h2>Using Secret management service via web-based GUI<a class="headerlink" href="#using-secret-management-service-via-web-based-gui" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Open <a class="reference external" href="https://vault.services.fedcloud.eu:8200">https://vault.services.fedcloud.eu:8200</a> in your browser.</p></li>
+<li><p>Choose OIDC authentication method in the pulldown menu, and click on the button
+<code class="docutils literal notranslate"><span class="pre">Sign</span> <span class="pre">in</span> <span class="pre">with</span> <span class="pre">OIDC</span> <span class="pre">provider</span></code></p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/vault-login-oidc.png"><img alt="Vault login via OIDC" src="_images/vault-login-oidc.png" style="width: 640px;" /></a>
+<ul class="simple">
+<li><p>Login via EGI Check-in and authorize the Vault GUI.</p></li>
+<li><p>You have logged into the Vault GUI. Each user has a private secret space, a &quot;home directory&quot; in
+the secret engine <code class="docutils literal notranslate"><span class="pre">secrets</span></code>, with EGI Check-in ID as the folder name.</p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/vault-main-window.png"><img alt="Vault main window" src="_images/vault-main-window.png" style="width: 640px;" /></a>
+<ul class="simple">
+<li><p>The &quot;home directory&quot; is not created automatically, so for the first time login, you may have to
+create it. In the <code class="docutils literal notranslate"><span class="pre">secrets</span></code> folder, click on <code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">secret</span></code> on the right side of your screen and
+create a new secret with a path starting with your EGI Check-in ID (<code class="docutils literal notranslate"><span class="pre">e0b6.…&#64;egi.eu</span></code> in the
+screenshot)</p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/vault-create-secret.png"><img alt="Vault main window" src="_images/vault-create-secret.png" style="width: 1200px;" /></a>
+<ul class="simple">
+<li><p>Your &quot;home directory&quot; will be created together with your first secret. Click on <code class="docutils literal notranslate"><span class="pre">secrets</span></code> folder,
+then your ID in the EGI Check-in to enter your private secret space, then browse/view/edit your
+secrets</p></li>
+</ul>
+</section>
+<section id="using-secret-management-service-via-vault-cli-and-access-token">
+<h2>Using Secret management service via Vault CLI and access token<a class="headerlink" href="#using-secret-management-service-via-vault-cli-and-access-token" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Install Vault CLI  if needed. See <a class="reference external" href="https://www.vaultproject.io/downloads">https://www.vaultproject.io/downloads</a> for downloading Vault for
+different OS.</p></li>
+<li><p>Set environment for URL of Vault server:</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span> <span class="nv">VAULT_ADDR</span><span class="o">=</span>https://vault.services.fedcloud.eu:8200
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Get your EGI Check-in access token (e.g. from <a class="reference external" href="https://aai.egi.eu/token/">https://aai.egi.eu/token/</a> or oidc-agent)
+and set it to an environment variable:</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span> <span class="nv">ACCESS_TOKEN</span><span class="o">=</span><span class="s2">&quot;ADD_YOUR_ACCESS_TOKEN_HERE&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Login to Vault using access tokens:</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>vault write auth/jwt/login <span class="nv">jwt</span><span class="o">=</span><span class="nv">$ACCESS_TOKEN</span>
+<span class="go">Key                  Value</span>
+<span class="go">---                  -----</span>
+<span class="go">token                s.XXXXXXXXXXXXXXXXXXXXXXX</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The command will return a Vault’s token in the form <code class="docutils literal notranslate"><span class="pre">token</span>&#160;&#160; <span class="pre">s.XXXXXXXXXXXXXXXXX</span></code>. Save the token
+to an environment variable and use it for manipulation with secrets in Vault</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span> <span class="nv">VAULT_TOKEN</span><span class="o">=</span><span class="s2">&quot;s.XXXXXXXXXXXXXX&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>For convenience, set your Vault’s home path to an environment variable</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span> <span class="nv">VAULT_HOME</span><span class="o">=</span>/secrets/YOUR_CHECKIN_ID@egi.eu/
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>List secrets in your &quot;home directory&quot;. VAULT_ADDR and VAULT_TOKEN must be set:</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>vault list <span class="nv">$VAULT_HOME</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Create a new secret with name <code class="docutils literal notranslate"><span class="pre">test</span></code> in your &quot;home directory&quot;, store value <code class="docutils literal notranslate"><span class="pre">value1</span></code> in key <code class="docutils literal notranslate"><span class="pre">key1</span></code>:</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>vault write <span class="nv">$VAULT_HOME</span>/test <span class="nv">key1</span><span class="o">=</span>value1
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Read your secret:</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>vault <span class="nb">read</span> <span class="nv">$VAULT_HOME</span>/test
+<span class="go">Key                 Value</span>
+<span class="go">---                 -----</span>
+<span class="go">refresh_interval    768h</span>
+<span class="go">key1                value1</span>
+</pre></div>
+</div>
+<p>There are alternative commands <code class="docutils literal notranslate"><span class="pre">kv</span> <span class="pre">put</span></code>, <code class="docutils literal notranslate"><span class="pre">kv</span> <span class="pre">get</span></code> for <code class="docutils literal notranslate"><span class="pre">write</span></code>, <code class="docutils literal notranslate"><span class="pre">read</span></code>. The full list of Vault
+commands is available at <a class="reference external" href="https://www.vaultproject.io/docs/commands">https://www.vaultproject.io/docs/commands</a></p>
+</section>
+<section id="using-vault-via-rest-api-or-external-clients">
+<h2>Using Vault via REST API or external clients<a class="headerlink" href="#using-vault-via-rest-api-or-external-clients" title="Permalink to this heading"></a></h2>
+<p>Vault has a REST API with similar inputs like the CLI. There is a long list of libraries and external
+clients/tools for accessing secrets in Vault. See <a class="reference external" href="https://www.vaultproject.io/api">https://www.vaultproject.io/api</a> or
+<a class="reference external" href="https://www.vaultproject.io/api-docs/relatedtools">https://www.vaultproject.io/api-docs/relatedtools</a> for more details.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="usage.html" class="btn btn-neutral float-left" title="User guides" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="design.html" class="btn btn-neutral float-right" title="Service design and implementation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Viet Tran.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

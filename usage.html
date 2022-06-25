@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Using Secret management service via Vault&#39;s GUI and client &mdash; Vault-doc  documentation</title>
+  <title>User guides &mdash; Vault-doc  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -19,8 +19,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Service design and implementation" href="design.html" />
-    <link rel="prev" title="User guides" href="quickstart.html" /> 
+    <link rel="next" title="Using Secret management service via Vault&#39;s GUI and client" href="vault.html" />
+    <link rel="prev" title="Quickstart" href="quickstart.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,13 +42,18 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">User guides</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Using Secret management service via Vault's GUI and client</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#using-secret-management-service-via-web-based-gui">Using Secret management service via web-based GUI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#using-secret-management-service-via-vault-cli-and-access-token">Using Secret management service via Vault CLI and access token</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#using-vault-via-rest-api-or-external-clients">Using Vault via REST API or external clients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User guides</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#concepts-of-secret-objects">Concepts of Secret objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisite">Prerequisite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#basic-usage">Basic usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#secret-values-from-small-text-files">Secret values from small text files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#encrypted-secrets">Encrypted secrets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#export-and-import-secrets">Export and import secrets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modifying-existing-secrets">Modifying existing secrets</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="vault.html">Using Secret management service via Vault's GUI and client</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design.html">Service design and implementation</a></li>
 </ul>
 
@@ -66,7 +71,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Using Secret management service via Vault's GUI and client</li>
+      <li>User guides</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/fedcloud-eu/vault-doc/blob/master/docs/usage.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -76,109 +81,173 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="using-secret-management-service-via-vault-s-gui-and-client">
-<h1>Using Secret management service via Vault's GUI and client<a class="headerlink" href="#using-secret-management-service-via-vault-s-gui-and-client" title="Permalink to this heading"></a></h1>
-<p>Although using Secret management service via FedCloud client is strongly recommended, the service is fully compatible
-with Vault and can be used via the web-based GUI or Vault's native client tool and libraries. The native client tool is
-more complicated but it has some functionalities not offered by FedCloud client, e.g. token renew. The compatibility
-also enable integration of existing services and applications that are already using Vault, to the Secret management
-service.</p>
-<section id="using-secret-management-service-via-web-based-gui">
-<h2>Using Secret management service via web-based GUI<a class="headerlink" href="#using-secret-management-service-via-web-based-gui" title="Permalink to this heading"></a></h2>
-<ul class="simple">
-<li><p>Open <a class="reference external" href="https://vault.services.fedcloud.eu:8200">https://vault.services.fedcloud.eu:8200</a> in your browser.</p></li>
-<li><p>Choose OIDC authentication method in the pulldown menu, and click on the button
-<code class="docutils literal notranslate"><span class="pre">Sign</span> <span class="pre">in</span> <span class="pre">with</span> <span class="pre">OIDC</span> <span class="pre">provider</span></code></p></li>
-</ul>
-<a class="reference internal image-reference" href="_images/vault-login-oidc.png"><img alt="Vault login via OIDC" src="_images/vault-login-oidc.png" style="width: 640px;" /></a>
-<ul class="simple">
-<li><p>Login via EGI Check-in and authorize the Vault GUI.</p></li>
-<li><p>You have logged into the Vault GUI. Each user has a private secret space, a &quot;home directory&quot; in
-the secret engine <code class="docutils literal notranslate"><span class="pre">secrets</span></code>, with EGI Check-in ID as the folder name.</p></li>
-</ul>
-<a class="reference internal image-reference" href="_images/vault-main-window.png"><img alt="Vault main window" src="_images/vault-main-window.png" style="width: 640px;" /></a>
-<ul class="simple">
-<li><p>The &quot;home directory&quot; is not created automatically, so for the first time login, you may have to
-create it. In the <code class="docutils literal notranslate"><span class="pre">secrets</span></code> folder, click on <code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">secret</span></code> on the right side of your screen and
-create a new secret with a path starting with your EGI Check-in ID (<code class="docutils literal notranslate"><span class="pre">e0b6.…&#64;egi.eu</span></code> in the
-screenshot)</p></li>
-</ul>
-<a class="reference internal image-reference" href="_images/vault-create-secret.png"><img alt="Vault main window" src="_images/vault-create-secret.png" style="width: 1200px;" /></a>
-<ul class="simple">
-<li><p>Your &quot;home directory&quot; will be created together with your first secret. Click on <code class="docutils literal notranslate"><span class="pre">secrets</span></code> folder,
-then your ID in the EGI Check-in to enter your private secret space, then browse/view/edit your
-secrets</p></li>
-</ul>
+  <section id="user-guides">
+<h1>User guides<a class="headerlink" href="#user-guides" title="Permalink to this heading"></a></h1>
+<p>Secret management service is implemented on the base of Hashicorp’s Vault which has web-based GUI and is supported by
+many client tools and libraries. However, using Secret management service via FedCloud client is strongly recommended
+as the client is tightly integrated with the service, it works out of the box without additional configuration,
+has simple syntax and also advanced features like encrypted secrets.</p>
+<section id="concepts-of-secret-objects">
+<h2>Concepts of Secret objects<a class="headerlink" href="#concepts-of-secret-objects" title="Permalink to this heading"></a></h2>
+<p>Secret objects in Secret management service are identified by their paths, like files on disk. Each user has a private
+secret space for storing his secret objects and cannot see secret objects from other users. Each secret object may
+contain several secret values, each value is identified by its key. For example, a secret object for a service in Cloud
+may contain several different passwords for different components: database, webservice and so on. Secret objects in
+Secret management service are created, retrieved, deleted as the whole, users cannot edit individual secret values of an
+existing secret.</p>
 </section>
-<section id="using-secret-management-service-via-vault-cli-and-access-token">
-<h2>Using Secret management service via Vault CLI and access token<a class="headerlink" href="#using-secret-management-service-via-vault-cli-and-access-token" title="Permalink to this heading"></a></h2>
+<section id="prerequisite">
+<h2>Prerequisite<a class="headerlink" href="#prerequisite" title="Permalink to this heading"></a></h2>
 <ul class="simple">
-<li><p>Install Vault CLI  if needed. See <a class="reference external" href="https://www.vaultproject.io/downloads">https://www.vaultproject.io/downloads</a> for downloading Vault for
-different OS.</p></li>
-<li><p>Set environment for URL of Vault server:</p></li>
+<li><p>The latest version of FedCloud client (1.2.18 and higher) is installed. If not, install or upgrade the client:</p></li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span> <span class="nv">VAULT_ADDR</span><span class="o">=</span>https://vault.services.fedcloud.eu:8200
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3 install -U fedcloudclient
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>Get your EGI Check-in access token (e.g. from <a class="reference external" href="https://aai.egi.eu/token/">https://aai.egi.eu/token/</a> or oidc-agent)
-and set it to an environment variable:</p></li>
+<li><p>Valid access token from EGI Check-in for authentication, either from
+<a class="reference external" href="https://aai.egi.eu/token">EGI Check-in Token Portal</a>
+or <a class="reference external" href="https://indigo-dc.gitbook.io/oidc-agent/">oidc-agent</a>, is set to environment variable:</p></li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span> <span class="nv">ACCESS_TOKEN</span><span class="o">=</span><span class="s2">&quot;ADD_YOUR_ACCESS_TOKEN_HERE&quot;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span> <span class="nv">OIDC_ACCESS_TOKEN</span><span class="o">=</span>&lt;ACCESS_TOKEN&gt;
 </pre></div>
 </div>
-<ul class="simple">
-<li><p>Login to Vault using access tokens:</p></li>
-</ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>vault write auth/jwt/login <span class="nv">jwt</span><span class="o">=</span><span class="nv">$ACCESS_TOKEN</span>
-<span class="go">Key                  Value</span>
-<span class="go">---                  -----</span>
-<span class="go">token                s.XXXXXXXXXXXXXXXXXXXXXXX</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>The command will return a Vault’s token in the form <code class="docutils literal notranslate"><span class="pre">token</span>&#160;&#160; <span class="pre">s.XXXXXXXXXXXXXXXXX</span></code>. Save the token
-to an environment variable and use it for manipulation with secrets in Vault</p></li>
-</ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span> <span class="nv">VAULT_TOKEN</span><span class="o">=</span><span class="s2">&quot;s.XXXXXXXXXXXXXX&quot;</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>For convenience, set your Vault’s home path to an environment variable</p></li>
-</ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span> <span class="nv">VAULT_HOME</span><span class="o">=</span>/secrets/YOUR_CHECKIN_ID@egi.eu/
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>List secrets in your &quot;home directory&quot;. VAULT_ADDR and VAULT_TOKEN must be set:</p></li>
-</ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>vault list <span class="nv">$VAULT_HOME</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Create a new secret with name <code class="docutils literal notranslate"><span class="pre">test</span></code> in your &quot;home directory&quot;, store value <code class="docutils literal notranslate"><span class="pre">value1</span></code> in key <code class="docutils literal notranslate"><span class="pre">key1</span></code>:</p></li>
-</ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>vault write <span class="nv">$VAULT_HOME</span>/test <span class="nv">key1</span><span class="o">=</span>value1
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Read your secret:</p></li>
-</ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>vault <span class="nb">read</span> <span class="nv">$VAULT_HOME</span>/test
-<span class="go">Key                 Value</span>
-<span class="go">---                 -----</span>
-<span class="go">refresh_interval    768h</span>
-<span class="go">key1                value1</span>
-</pre></div>
-</div>
-<p>There are alternative commands <code class="docutils literal notranslate"><span class="pre">kv</span> <span class="pre">put</span></code>, <code class="docutils literal notranslate"><span class="pre">kv</span> <span class="pre">get</span></code> for <code class="docutils literal notranslate"><span class="pre">write</span></code>, <code class="docutils literal notranslate"><span class="pre">read</span></code>. The full list of Vault
-commands is available at <a class="reference external" href="https://www.vaultproject.io/docs/commands">https://www.vaultproject.io/docs/commands</a></p>
 </section>
-<section id="using-vault-via-rest-api-or-external-clients">
-<h2>Using Vault via REST API or external clients<a class="headerlink" href="#using-vault-via-rest-api-or-external-clients" title="Permalink to this heading"></a></h2>
-<p>Vault has a REST API with similar inputs like the CLI. There is a long list of libraries and external
-clients/tools for accessing secrets in Vault. See <a class="reference external" href="https://www.vaultproject.io/api">https://www.vaultproject.io/api</a> or
-<a class="reference external" href="https://www.vaultproject.io/api-docs/relatedtools">https://www.vaultproject.io/api-docs/relatedtools</a> for more details.</p>
+<section id="basic-usage">
+<h2>Basic usage<a class="headerlink" href="#basic-usage" title="Permalink to this heading"></a></h2>
+<p>As FedCloud client is tightly integrated with Secret management service, no additional setting is required. Users can
+access the service immediately with simple commands without understanding details described in the Section
+<a class="reference external" href="https://vault.docs.fedcloud.eu/design.html">Service design and implementation</a>. There is a quickstart:</p>
+<ul class="simple">
+<li><p>Create a secret object <code class="docutils literal notranslate"><span class="pre">my_app_secrets</span></code> in Secret management service, store MySQL and admin passwords in the
+secret object:</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret put my_app_secrets <span class="nv">mysql_password</span><span class="o">=</span><span class="m">123456</span> <span class="nv">admin_password</span><span class="o">=</span>abcdef
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>List secret objects stored in Secret management service:</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret list
+<span class="go">my_app_secrets</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Read a secret object from Secret management service. If a key is given as parameter, the client will print only the
+secret value corresponding to the key (what is useful for scripting), otherwise it will print the table of all
+key:value pairs.</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get my_app_secrets
+<span class="go">key             value</span>
+<span class="go">--------------  -------</span>
+<span class="go">admin_password  abcdef</span>
+<span class="go">mysql_password  123456</span>
+
+
+<span class="gp">$ </span>fedcloud secret get my_app_secrets mysql_password
+<span class="go">123456</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Delete a secret object from Secret management service.</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret delete my_app_secrets
+</pre></div>
+</div>
+</section>
+<section id="secret-values-from-small-text-files">
+<h2>Secret values from small text files<a class="headerlink" href="#secret-values-from-small-text-files" title="Permalink to this heading"></a></h2>
+<p>If the value string is started with <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>, the FedCloud client will read the content of the file with the name for the
+value of the key. The following command creates a secret object <code class="docutils literal notranslate"><span class="pre">certificate</span></code> in Secret management service for storing
+host certificate and host key:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret put certificate <span class="nv">cert</span><span class="o">=</span>@hostcert.pem <span class="nv">key</span><span class="o">=</span>@hostkey.pem
+</pre></div>
+</div>
+<p>Users can get the certificate latter on the target VM as follows:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get certificate cert &gt; hostcert.pem
+<span class="gp">$ </span>fedcloud secret get certificate key  &gt; hostkey.pem
+</pre></div>
+</div>
+<p>So far, only values from text files are supported. For binary files, it is recommended to use <code class="docutils literal notranslate"><span class="pre">uuencode</span></code> command
+for encoding the files as texts before putting them to the service  and <code class="docutils literal notranslate"><span class="pre">uudecode</span></code> for converting the content back
+to the original format.</p>
+<p>The limit size of the secret object is 512kB, it is sufficient for storing tokens, certificates, configuration files
+and so on. For larger datasets, please use permanent cloud storages.</p>
+</section>
+<section id="encrypted-secrets">
+<h2>Encrypted secrets<a class="headerlink" href="#encrypted-secrets" title="Permalink to this heading"></a></h2>
+<p>For highly-sensitive secrets, users can choose to encrypt the secret values before putting them to the service. The
+encryption is done automatically on the fly if an encryption key (passphrase) is provided:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret put certificate <span class="nv">cert</span><span class="o">=</span>@hostcert.pem <span class="nv">key</span><span class="o">=</span>@hostkey.pem --encrypt-key my-pass-phrase
+</pre></div>
+</div>
+<p>Decryption is done in a similar way, just by providing decryption key when reading, the secret values will be decrypted
+automatically if the key is correct:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get certificate cert --decrypt-key my-pass-phrase
+</pre></div>
+</div>
+<p>Users can verify what is actually stored in the Secret management service by reading the secret object without
+providing decryption key:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get certificate cert
+<span class="go">gAAAAAB...............................</span>
+</pre></div>
+</div>
+<p>The encryption/decryption is done by standard Python crytography library. Security experts are invited to review
+the code (available at <a class="reference external" href="https://github.com/tdviet/fedcloudclient/blob/master/fedcloudclient/secret.py#L124">GitHub</a>)
+and give feedback and suggestions for improvements if possible.</p>
+</section>
+<section id="export-and-import-secrets">
+<h2>Export and import secrets<a class="headerlink" href="#export-and-import-secrets" title="Permalink to this heading"></a></h2>
+<p>Users can print secret objects to files YAML/JSON format for further processing by option <code class="docutils literal notranslate"><span class="pre">--output-format</span></code>
+or simply <code class="docutils literal notranslate"><span class="pre">-f</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get my_app_secrets -f json
+
+<span class="gp">$ </span>fedcloud secret get my_app_secrets -f yaml &gt; my_app_secrets.yaml
+</pre></div>
+</div>
+<p>The secret objects in YAML/JSON files can be imported back to the service by adding <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> before filenames as parameters,
+telling client to read secret objects from files:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret put my_second_app_secrets @my_app_secrets.yaml
+</pre></div>
+</div>
+<p>Note the difference in examples: <code class="docutils literal notranslate"><span class="pre">cert=&#64;hostcert.pem</span></code> for reading the content of the file <code class="docutils literal notranslate"><span class="pre">horstcert.pem</span></code> as the
+value for the key <code class="docutils literal notranslate"><span class="pre">cert</span></code>, and <code class="docutils literal notranslate"><span class="pre">&#64;my_app_secrets.yaml</span></code> for reading whole secret object with all key:value pairs
+from the YAML file.</p>
+<p>As YAML format is a superset of JSON, it is expected by default unless the filename has <code class="docutils literal notranslate"><span class="pre">.json</span></code> extension. Try to
+export your secrets to both formats to see the differences between formats.</p>
+<p>Importing secret objects from files in free text format <code class="docutils literal notranslate"><span class="pre">key=value</span></code> is not supported as the format is error-prone,
+especially for multi-line secret values or values with special characters. Users can replace <code class="docutils literal notranslate"><span class="pre">=</span></code> to <code class="docutils literal notranslate"><span class="pre">:</span></code> for
+converting simple free text files to YAML format. Note that a blank space after <code class="docutils literal notranslate"><span class="pre">:</span></code> is required by YAML syntax.</p>
+</section>
+<section id="modifying-existing-secrets">
+<h2>Modifying existing secrets<a class="headerlink" href="#modifying-existing-secrets" title="Permalink to this heading"></a></h2>
+<p>As mentioned in the Concepts above, secret values in secret objects cannot be edited individually in the service.
+However, users can get the contents of existing secret objects, change them locally, then put the new contents
+back to the service. For examples:</p>
+<ul class="simple">
+<li><p>Adding new secret values to an existing secret object:</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get certificate -f json &gt; certificate.json
+
+<span class="gp">$ </span>fedcloud secret put certificate @certificate.json <span class="nv">another_cert</span><span class="o">=</span>@usercert.pem <span class="nv">another_key</span><span class="o">=</span>@userkey.pem
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Deleting secret values in an existing secret object:</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get certificate -f json <span class="p">|</span> jq <span class="s1">&#39;del (.another_cert, .another_key)&#39;</span> &gt; certificate.json
+
+<span class="gp">$ </span>fedcloud secret put certificate @certificate.json
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Updating secret values in an existing secret object:</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get certificate -f json &gt; certificate.json
+
+<span class="gp">$ </span>fedcloud secret put certificate @certificate.json <span class="nv">cert</span><span class="o">=</span>@new_hostcert.pem <span class="nv">key</span><span class="o">=</span>@new_hostkey.pem
+</pre></div>
+</div>
 </section>
 </section>
 
@@ -186,8 +255,8 @@ clients/tools for accessing secrets in Vault. See <a class="reference external" 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="quickstart.html" class="btn btn-neutral float-left" title="User guides" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="design.html" class="btn btn-neutral float-right" title="Service design and implementation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="quickstart.html" class="btn btn-neutral float-left" title="Quickstart" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="vault.html" class="btn btn-neutral float-right" title="Using Secret management service via Vault&#39;s GUI and client" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
