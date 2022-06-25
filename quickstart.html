@@ -221,7 +221,7 @@ converting simple free text files to YAML format. Note that a blank space after 
 <section id="modifying-existing-secrets">
 <h2>Modifying existing secrets<a class="headerlink" href="#modifying-existing-secrets" title="Permalink to this heading"></a></h2>
 <p>As mentioned in the Concepts above, secret values in secret objects cannot be edited. However, users can get the
-contents of existing secret objects, change them locally and put the new contents back to the service. For examples:</p>
+contents of existing secret objects, change them locally, then put the new contents back to the service. For examples:</p>
 <ul class="simple">
 <li><p>Adding new secret values to an existing secret object:</p></li>
 </ul>
@@ -236,6 +236,14 @@ contents of existing secret objects, change them locally and put the new content
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get certificate -f json <span class="p">|</span> jq <span class="s1">&#39;del (.another_cert, .another_key)&#39;</span> &gt; certificate.json
 
 <span class="gp">$ </span>fedcloud secret put certificate @certificate.json
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Updating secret values in an existing secret object:</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get certificate -f json &gt; certificate.json
+
+<span class="gp">$ </span>fedcloud secret put certificate @certificate.json <span class="nv">cert</span><span class="o">=</span>@new_hostcert.pem <span class="nv">key</span><span class="o">=</span>@new_hostkey.pem
 </pre></div>
 </div>
 </section>

@@ -168,7 +168,7 @@ Modifying existing secrets
 **************************
 
 As mentioned in the Concepts above, secret values in secret objects cannot be edited. However, users can get the
-contents of existing secret objects, change them locally and put the new contents back to the service. For examples:
+contents of existing secret objects, change them locally, then put the new contents back to the service. For examples:
 
 * Adding new secret values to an existing secret object:
 
@@ -185,3 +185,11 @@ contents of existing secret objects, change them locally and put the new content
     $ fedcloud secret get certificate -f json | jq 'del (.another_cert, .another_key)' > certificate.json
 
     $ fedcloud secret put certificate @certificate.json
+
+* Updating secret values in an existing secret object:
+
+::
+
+    $ fedcloud secret get certificate -f json > certificate.json
+
+    $ fedcloud secret put certificate @certificate.json cert=@new_hostcert.pem key=@new_hostkey.pem
