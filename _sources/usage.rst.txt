@@ -24,7 +24,7 @@ Prerequisite
 .. highlight:: console
 
 * The latest version of `FedCloud client <https://fedcloudclient.fedcloud.eu/>`_
-  (1.2.18 and higher) is installed. If not, install or upgrade the client:
+  (1.2.19 and higher) is installed. If not, install or upgrade the client:
 
 ::
 
@@ -113,29 +113,29 @@ Secret values from small binary files
 
 The Secret management service does not support storing binary data as secret values. However, FedCloud client provides
 support for storing small binary files as secret values by encoding/decoding the binary data to ASCII via
-`base64 <https://docs.python.org/3/library/base64.html>`_. Users need to add option ``--binary-file`` or ``-f`` when
+`base64 <https://docs.python.org/3/library/base64.html>`_. Users need to add option ``--binary-file`` or ``-b`` when
 reading/writing binary secret values from/to files:
 
 ::
 
     $ fedcloud secret put secret-image image=@secret-image.png --binary-file
 
-    $ fedcloud secret get secret-image image --binary-file > received-image.png
-
-    $ fedcloud secret get secret-image image --binary-file --output-file received-image.png
+    $ fedcloud secret get secret-image image --b > received-image.png
 
 
 Encrypted secrets
 *****************
 
 For highly-sensitive secrets, users can choose to encrypt the secret values before putting them to the service. The
-encryption is done automatically on the fly if an encryption key (passphrase) is provided:
+encryption is done automatically on the fly if an encryption key (passphrase) is provided via option
+``encrypt-key`` or ``-e``:
 
 ::
 
     $ fedcloud secret put certificate cert=@hostcert.pem key=@hostkey.pem --encrypt-key my-pass-phrase
 
-Decryption is done in a similar way, just by providing decryption key when reading, the secret values will be decrypted
+Decryption is done in a similar way, just by providing decryption key via option
+``decrypt-key`` or ``-d`` when reading, the secret values will be decrypted
 automatically if the key is correct:
 
 ::
@@ -151,7 +151,7 @@ providing decryption key:
     gAAAAAB...............................
 
 The encryption/decryption is done by standard Python crytography library. Security experts are invited to review
-the code (available at `GitHub <https://github.com/tdviet/fedcloudclient/blob/master/fedcloudclient/secret.py#L148>`_)
+the code (available at `GitHub <https://github.com/tdviet/fedcloudclient/blob/master/fedcloudclient/secret.py#L159>`_)
 and give feedback and suggestions for improvements if possible.
 
 Export and import secrets
@@ -162,9 +162,9 @@ YAML/JSON format for further processing by option ``--output-format`` or simply 
 
 ::
 
-    $ fedcloud secret get my_app_secrets --output-format json > my_app_secrets.json
+    $ fedcloud secret get my_app_secrets -f json > my_app_secrets.json
 
-    $ fedcloud secret get my_app_secrets --output-format yaml --output-file my_app_secrets.yaml
+    $ fedcloud secret get my_app_secrets -f yaml -o my_app_secrets.yaml
 
 The secret objects in YAML/JSON files can be imported back to the service by adding ``@`` before filenames as parameters,
 telling client to read secret objects from files:
