@@ -75,6 +75,10 @@ access the service immediately with simple commands without understanding detail
     $ fedcloud secret get my_app_secrets mysql_password
     123456
 
+    $ ADMIN_PASSWORD=$(fedcloud secret get my_app_secrets admin_password)
+    $ echo $ADMIN_PASSWORD
+    abcdef
+
 * Delete a secret object from Secret management service.
 
 ::
@@ -100,12 +104,26 @@ Users can get the certificate latter on the target VM as follows:
     $ fedcloud secret get certificate cert > hostcert.pem
     $ fedcloud secret get certificate key  > hostkey.pem
 
-So far, only values from text files are supported. For binary files, it is recommended to use ``uuencode`` command
-for encoding the files as texts before putting them to the service  and ``uudecode`` for converting the content back
-to the original format.
-
 The limit size of the secret object is 512kB, it is sufficient for storing tokens, certificates, configuration files
 and so on. For larger datasets, please use permanent cloud storages.
+
+
+Secret values from small binary files
+*************************************
+
+The Secret management service does not support storing binary data as secret values. However, FedCloud client provides
+support for storing small binary files as secret values by encoding/decoding the binary data to ASCII via
+`base64 <https://docs.python.org/3/library/base64.html>`_. Users need to add option ``--binary-file`` or ``-f`` when
+reading/writing binary secret values from/to files:
+
+::
+
+    $ fedcloud secret put secret-image image=@secret-image.png --binary-file
+
+    $ fedcloud secret get secret-image image --binary-file > received-image.png
+
+    $ fedcloud secret get secret-image image --binary-file --output-file received-image.png
+
 
 Encrypted secrets
 *****************
@@ -133,20 +151,20 @@ providing decryption key:
     gAAAAAB...............................
 
 The encryption/decryption is done by standard Python crytography library. Security experts are invited to review
-the code (available at `GitHub <https://github.com/tdviet/fedcloudclient/blob/master/fedcloudclient/secret.py#L124>`_)
+the code (available at `GitHub <https://github.com/tdviet/fedcloudclient/blob/master/fedcloudclient/secret.py#L148>`_)
 and give feedback and suggestions for improvements if possible.
 
 Export and import secrets
 *************************
 
-Users can print secret objects to files YAML/JSON format for further processing by option ``--output-format``
-or simply ``-f``:
+Users can print secret objects to files by adding option ``--output-file`` or ``-o``. They can also print outputs in
+YAML/JSON format for further processing by option ``--output-format`` or simply ``-f``:
 
 ::
 
-    $ fedcloud secret get my_app_secrets -f json
+    $ fedcloud secret get my_app_secrets --output-format json > my_app_secrets.json
 
-    $ fedcloud secret get my_app_secrets -f yaml > my_app_secrets.yaml
+    $ fedcloud secret get my_app_secrets --output-format yaml --output-file my_app_secrets.yaml
 
 The secret objects in YAML/JSON files can be imported back to the service by adding ``@`` before filenames as parameters,
 telling client to read secret objects from files:
