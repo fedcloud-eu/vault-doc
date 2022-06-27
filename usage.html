@@ -272,8 +272,8 @@ back to the service. For examples:</p>
 <section id="reading-data-from-standard-inputs">
 <h2>Reading data from standard inputs<a class="headerlink" href="#reading-data-from-standard-inputs" title="Permalink to this heading"></a></h2>
 <p>Reading data from stdin may help users to make shorter scripts and to avoid storing secrets in intermediate files on
-disks. The symbol <code class="docutils literal notranslate"><span class="pre">-</span></code> in input parameters means the data will be read from standard input in the same way as <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>
-for reading from files. For examples:</p>
+disks for security reasons. The symbol <code class="docutils literal notranslate"><span class="pre">-</span></code> in input parameters means the data will be read from standard input in
+the same way as <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> for reading from files. For examples:</p>
 <ul class="simple">
 <li><p>Reading key:value pairs from standard input. The data need to be in JSON or YAML format:</p></li>
 </ul>
@@ -287,7 +287,7 @@ for reading from files. For examples:</p>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>Copying a secret object:</p></li>
+<li><p>Copying a secret object. The command export the existing secret object to JSON and import it as a new copy:</p></li>
 </ul>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get my_app_secrets -f json <span class="p">|</span> fedcloud secret put new-secret-copy -
 </pre></div>
