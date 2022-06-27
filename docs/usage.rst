@@ -220,8 +220,8 @@ Reading data from standard inputs
 *********************************
 
 Reading data from stdin may help users to make shorter scripts and to avoid storing secrets in intermediate files on
-disks. The symbol ``-`` in input parameters means the data will be read from standard input in the same way as ``@``
-for reading from files. For examples:
+disks for security reasons. The symbol ``-`` in input parameters means the data will be read from standard input in
+the same way as ``@`` for reading from files. For examples:
 
 * Reading key:value pairs from standard input. The data need to be in JSON or YAML format:
 
@@ -235,7 +235,7 @@ for reading from files. For examples:
 
     $ echo "abcdef" | fedcloud secret put my_app_secrets admin_password=-
 
-* Copying a secret object:
+* Copying a secret object. The command export the existing secret object to JSON and import it as a new copy:
 
 ::
 
