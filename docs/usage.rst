@@ -111,7 +111,7 @@ and so on. For larger datasets, please use permanent cloud storages.
 Secret values from small binary files
 *************************************
 
-The Secret management service does not support storing binary data as secret values. However, FedCloud client provides
+It is recommended to store secret values as texts for compatibility and easy manipulation. FedCloud client provides
 support for storing small binary files as secret values by encoding/decoding the binary data to ASCII via
 `base64 <https://docs.python.org/3/library/base64.html>`_. Users need to add option ``--binary-file`` or ``-b`` when
 reading/writing binary secret values from/to files:
@@ -120,7 +120,7 @@ reading/writing binary secret values from/to files:
 
     $ fedcloud secret put secret-image image=@secret-image.png --binary-file
 
-    $ fedcloud secret get secret-image image --b > received-image.png
+    $ fedcloud secret get secret-image image -b > received-image.png
 
 
 Encrypted secrets
@@ -142,8 +142,8 @@ automatically if the key is correct:
 
     $ fedcloud secret get certificate cert --decrypt-key my-pass-phrase
 
-Users can verify what is actually stored in the Secret management service by reading the secret object without
-providing decryption key:
+Only secret values are encrypted, not their keys. Users can verify what is actually stored in the Secret management
+service by reading the secret object without providing decryption key:
 
 ::
 
@@ -157,14 +157,14 @@ and give feedback and suggestions for improvements if possible.
 Export and import secrets
 *************************
 
-Users can print secret objects to files by adding option ``--output-file`` or ``-o``. They can also print outputs in
+Users can print outputs in
 YAML/JSON format for further processing by option ``--output-format`` or simply ``-f``:
 
 ::
 
-    $ fedcloud secret get my_app_secrets -f json > my_app_secrets.json
+    $ fedcloud secret get my_app_secrets -f json
 
-    $ fedcloud secret get my_app_secrets -f yaml -o my_app_secrets.yaml
+    $ fedcloud secret get my_app_secrets -f yaml > my_app_secrets.yaml
 
 The secret objects in YAML/JSON files can be imported back to the service by adding ``@`` before filenames as parameters,
 telling client to read secret objects from files:
@@ -215,3 +215,34 @@ back to the service. For examples:
     $ fedcloud secret get certificate -f json > certificate.json
 
     $ fedcloud secret put certificate @certificate.json cert=@new_hostcert.pem key=@new_hostkey.pem
+
+Reading data from standard inputs
+*********************************
+
+Reading data from stdin may help users to make shorter scripts and to avoid storing secrets in intermediate files on
+disks. The symbol ``-`` in input parameters means the data will be read from standard input in the same way as ``@``
+for reading from files. For examples:
+
+* Reading key:value pairs from standard input. The data need to be in JSON or YAML format:
+
+::
+
+    $ echo '{"mysql_password":"123456"}' | fedcloud secret put my_app_secrets -
+
+* Reading only secret value from standard input:
+
+::
+
+    $ echo "abcdef" | fedcloud secret put my_app_secrets admin_password=-
+
+* Copying a secret object:
+
+::
+
+    $ fedcloud secret get my_app_secrets -f json | fedcloud secret put new-secret-copy -
+
+* Adding new secret values to an existing secret object (in example above) without storing secrets in intermediate files:
+
+::
+
+    $ fedcloud secret get certificate -f json | fedcloud secret put certificate - another_cert=@usercert.pem another_key=@userkey.pem
