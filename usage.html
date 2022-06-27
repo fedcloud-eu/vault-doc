@@ -52,6 +52,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#encrypted-secrets">Encrypted secrets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#export-and-import-secrets">Export and import secrets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#modifying-existing-secrets">Modifying existing secrets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reading-data-from-standard-inputs">Reading data from standard inputs</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="vault.html">Using Secret management service via Vault's GUI and client</a></li>
@@ -181,13 +182,13 @@ and so on. For larger datasets, please use permanent cloud storages.</p>
 </section>
 <section id="secret-values-from-small-binary-files">
 <h2>Secret values from small binary files<a class="headerlink" href="#secret-values-from-small-binary-files" title="Permalink to this heading"></a></h2>
-<p>The Secret management service does not support storing binary data as secret values. However, FedCloud client provides
+<p>It is recommended to store secret values as texts for compatibility and easy manipulation. FedCloud client provides
 support for storing small binary files as secret values by encoding/decoding the binary data to ASCII via
 <a class="reference external" href="https://docs.python.org/3/library/base64.html">base64</a>. Users need to add option <code class="docutils literal notranslate"><span class="pre">--binary-file</span></code> or <code class="docutils literal notranslate"><span class="pre">-b</span></code> when
 reading/writing binary secret values from/to files:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret put secret-image <span class="nv">image</span><span class="o">=</span>@secret-image.png --binary-file
 
-<span class="gp">$ </span>fedcloud secret get secret-image image --b &gt; received-image.png
+<span class="gp">$ </span>fedcloud secret get secret-image image -b &gt; received-image.png
 </pre></div>
 </div>
 </section>
@@ -205,8 +206,8 @@ automatically if the key is correct:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get certificate cert --decrypt-key my-pass-phrase
 </pre></div>
 </div>
-<p>Users can verify what is actually stored in the Secret management service by reading the secret object without
-providing decryption key:</p>
+<p>Only secret values are encrypted, not their keys. Users can verify what is actually stored in the Secret management
+service by reading the secret object without providing decryption key:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get certificate cert
 <span class="go">gAAAAAB...............................</span>
 </pre></div>
@@ -217,11 +218,11 @@ and give feedback and suggestions for improvements if possible.</p>
 </section>
 <section id="export-and-import-secrets">
 <h2>Export and import secrets<a class="headerlink" href="#export-and-import-secrets" title="Permalink to this heading"></a></h2>
-<p>Users can print secret objects to files by adding option <code class="docutils literal notranslate"><span class="pre">--output-file</span></code> or <code class="docutils literal notranslate"><span class="pre">-o</span></code>. They can also print outputs in
+<p>Users can print outputs in
 YAML/JSON format for further processing by option <code class="docutils literal notranslate"><span class="pre">--output-format</span></code> or simply <code class="docutils literal notranslate"><span class="pre">-f</span></code>:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get my_app_secrets -f json &gt; my_app_secrets.json
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get my_app_secrets -f json
 
-<span class="gp">$ </span>fedcloud secret get my_app_secrets -f yaml -o my_app_secrets.yaml
+<span class="gp">$ </span>fedcloud secret get my_app_secrets -f yaml &gt; my_app_secrets.yaml
 </pre></div>
 </div>
 <p>The secret objects in YAML/JSON files can be imported back to the service by adding <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> before filenames as parameters,
@@ -265,6 +266,36 @@ back to the service. For examples:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get certificate -f json &gt; certificate.json
 
 <span class="gp">$ </span>fedcloud secret put certificate @certificate.json <span class="nv">cert</span><span class="o">=</span>@new_hostcert.pem <span class="nv">key</span><span class="o">=</span>@new_hostkey.pem
+</pre></div>
+</div>
+</section>
+<section id="reading-data-from-standard-inputs">
+<h2>Reading data from standard inputs<a class="headerlink" href="#reading-data-from-standard-inputs" title="Permalink to this heading"></a></h2>
+<p>Reading data from stdin may help users to make shorter scripts and to avoid storing secrets in intermediate files on
+disks. The symbol <code class="docutils literal notranslate"><span class="pre">-</span></code> in input parameters means the data will be read from standard input in the same way as <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>
+for reading from files. For examples:</p>
+<ul class="simple">
+<li><p>Reading key:value pairs from standard input. The data need to be in JSON or YAML format:</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span> <span class="s1">&#39;{&quot;mysql_password&quot;:&quot;123456&quot;}&#39;</span> <span class="p">|</span> fedcloud secret put my_app_secrets -
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Reading only secret value from standard input:</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span> <span class="s2">&quot;abcdef&quot;</span> <span class="p">|</span> fedcloud secret put my_app_secrets <span class="nv">admin_password</span><span class="o">=</span>-
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Copying a secret object:</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get my_app_secrets -f json <span class="p">|</span> fedcloud secret put new-secret-copy -
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Adding new secret values to an existing secret object (in example above) without storing secrets in intermediate files:</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get certificate -f json <span class="p">|</span> fedcloud secret put certificate - <span class="nv">another_cert</span><span class="o">=</span>@usercert.pem <span class="nv">another_key</span><span class="o">=</span>@userkey.pem
 </pre></div>
 </div>
 </section>
