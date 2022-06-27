@@ -61,7 +61,7 @@ access the service immediately with simple commands without understanding detail
 
 * Read a secret object from Secret management service. If a key is given as parameter, the client will print only the
   secret value corresponding to the key (what is useful for scripting), otherwise it will print the table of all
-  key:value pairs.
+  ``key:value`` pairs.
 
 ::
 
@@ -175,7 +175,7 @@ telling client to read secret objects from files:
 
 
 Note the difference in examples: ``cert=@hostcert.pem`` for reading the content of the file ``horstcert.pem`` as the
-value for the key ``cert``, and ``@my_app_secrets.yaml`` for reading whole secret object with all key:value pairs
+value for the key ``cert``, and ``@my_app_secrets.yaml`` for reading whole secret object with all ``key:value`` pairs
 from the YAML file.
 
 As YAML format is a superset of JSON, it is expected by default unless the filename has ``.json`` extension. Try to
@@ -223,7 +223,7 @@ Reading data from stdin may help users to make shorter scripts and to avoid stor
 disks for security reasons. The symbol ``-`` in input parameters means the data will be read from standard input in
 the same way as ``@`` for reading from files. For examples:
 
-* Reading key:value pairs from standard input. The data need to be in JSON or YAML format:
+* Reading ``key:value`` pairs from standard input. The data need to be in JSON or YAML format:
 
 ::
 

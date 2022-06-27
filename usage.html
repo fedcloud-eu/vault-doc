@@ -140,7 +140,7 @@ secret object:</p></li>
 <ul class="simple">
 <li><p>Read a secret object from Secret management service. If a key is given as parameter, the client will print only the
 secret value corresponding to the key (what is useful for scripting), otherwise it will print the table of all
-key:value pairs.</p></li>
+<code class="docutils literal notranslate"><span class="pre">key:value</span></code> pairs.</p></li>
 </ul>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get my_app_secrets
 <span class="go">key             value</span>
@@ -231,7 +231,7 @@ telling client to read secret objects from files:</p>
 </pre></div>
 </div>
 <p>Note the difference in examples: <code class="docutils literal notranslate"><span class="pre">cert=&#64;hostcert.pem</span></code> for reading the content of the file <code class="docutils literal notranslate"><span class="pre">horstcert.pem</span></code> as the
-value for the key <code class="docutils literal notranslate"><span class="pre">cert</span></code>, and <code class="docutils literal notranslate"><span class="pre">&#64;my_app_secrets.yaml</span></code> for reading whole secret object with all key:value pairs
+value for the key <code class="docutils literal notranslate"><span class="pre">cert</span></code>, and <code class="docutils literal notranslate"><span class="pre">&#64;my_app_secrets.yaml</span></code> for reading whole secret object with all <code class="docutils literal notranslate"><span class="pre">key:value</span></code> pairs
 from the YAML file.</p>
 <p>As YAML format is a superset of JSON, it is expected by default unless the filename has <code class="docutils literal notranslate"><span class="pre">.json</span></code> extension. Try to
 export your secrets to both formats to see the differences between formats.</p>
@@ -275,7 +275,7 @@ back to the service. For examples:</p>
 disks for security reasons. The symbol <code class="docutils literal notranslate"><span class="pre">-</span></code> in input parameters means the data will be read from standard input in
 the same way as <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> for reading from files. For examples:</p>
 <ul class="simple">
-<li><p>Reading key:value pairs from standard input. The data need to be in JSON or YAML format:</p></li>
+<li><p>Reading <code class="docutils literal notranslate"><span class="pre">key:value</span></code> pairs from standard input. The data need to be in JSON or YAML format:</p></li>
 </ul>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span> <span class="s1">&#39;{&quot;mysql_password&quot;:&quot;123456&quot;}&#39;</span> <span class="p">|</span> fedcloud secret put my_app_secrets -
 </pre></div>
