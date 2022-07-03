@@ -13,6 +13,10 @@ The Secret management service is designed as follows:
   simple syntax. Authentication is realized via OIDC tokens from EGI Check-in, no additional registration,
   no extra credentials are required.
 
+* **Advanced features**: Built-in support for secret values from files, export/import secrets to/from files in
+  YAML/JSON formats. Encrypting/decrypting secret values on the fly on the client side greatly improves security
+  and trust of the service.
+
 * **Compatibility**: The service is based on `Hashicorp’s Vault <https://www.vaultproject.io/>`_
   which is well-known in industry, with many client tools
   and libraries. Software for service and clients are open-sourced with strong support from communities.
