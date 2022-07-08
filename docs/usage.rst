@@ -128,14 +128,14 @@ Encrypted secrets
 
 For highly-sensitive secrets, users can choose to encrypt the secret values before putting them to the service. The
 encryption is done automatically on the fly if an encryption key (passphrase) is provided via option
-``encrypt-key`` or ``-e``:
+``--encrypt-key`` or ``-e``:
 
 ::
 
     $ fedcloud secret put certificate cert=@hostcert.pem key=@hostkey.pem --encrypt-key my-pass-phrase
 
 Decryption is done in a similar way, just by providing decryption key via option
-``decrypt-key`` or ``-d`` when reading, the secret values will be decrypted
+``--decrypt-key`` or ``-d`` when reading, the secret values will be decrypted
 automatically if the key is correct:
 
 ::
