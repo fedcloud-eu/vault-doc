@@ -196,12 +196,12 @@ reading/writing binary secret values from/to files:</p>
 <h2>Encrypted secrets<a class="headerlink" href="#encrypted-secrets" title="Permalink to this heading"></a></h2>
 <p>For highly-sensitive secrets, users can choose to encrypt the secret values before putting them to the service. The
 encryption is done automatically on the fly if an encryption key (passphrase) is provided via option
-<code class="docutils literal notranslate"><span class="pre">encrypt-key</span></code> or <code class="docutils literal notranslate"><span class="pre">-e</span></code>:</p>
+<code class="docutils literal notranslate"><span class="pre">--encrypt-key</span></code> or <code class="docutils literal notranslate"><span class="pre">-e</span></code>:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret put certificate <span class="nv">cert</span><span class="o">=</span>@hostcert.pem <span class="nv">key</span><span class="o">=</span>@hostkey.pem --encrypt-key my-pass-phrase
 </pre></div>
 </div>
 <p>Decryption is done in a similar way, just by providing decryption key via option
-<code class="docutils literal notranslate"><span class="pre">decrypt-key</span></code> or <code class="docutils literal notranslate"><span class="pre">-d</span></code> when reading, the secret values will be decrypted
+<code class="docutils literal notranslate"><span class="pre">--decrypt-key</span></code> or <code class="docutils literal notranslate"><span class="pre">-d</span></code> when reading, the secret values will be decrypted
 automatically if the key is correct:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get certificate cert --decrypt-key my-pass-phrase
 </pre></div>
