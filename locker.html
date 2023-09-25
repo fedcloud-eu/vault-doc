@@ -83,19 +83,15 @@
 Users can effortlessly create a locker, deposit their secrets within it, and then furnish the locker's
 token to their VMs. Key security attributes of the locker system include:</p>
 <ul class="simple">
-<li><p><strong>Temporary and autoclean</strong>: Lockers have a limited lifespan and quantity. Upon expiration, lockers are</p></li>
-</ul>
-<p>automatically purged, along with all the secrets contained within them.</p>
-<ul class="simple">
-<li><p><strong>Isolation</strong>: Access to the secrets within a locker is exclusively through its associated token, which</p></li>
-</ul>
-<p>can solely be used for accessing the locker's secrets—nothing more. This isolation allows users to store
+<li><p><strong>Temporary and autoclean</strong>: Lockers have a limited lifespan and quantity. Upon expiration, lockers are
+automatically purged, along with all the secrets contained within them.</p></li>
+<li><p><strong>Isolation</strong>: Access to the secrets within a locker is exclusively through its associated token, which
+can solely be used for accessing the locker's secrets—nothing more. This isolation allows users to store
 tokens in Continuous Integration/Continuous Deployment (CI/CD) pipelines and similar tools, mitigating
-the risk of exposing personal secrets.</p>
-<ul class="simple">
-<li><p><strong>Malfeasance detection</strong>: The locker mechanism possesses the capability to detect if a token has been</p></li>
+the risk of exposing personal secrets.</p></li>
+<li><p><strong>Malfeasance detection</strong>: The locker mechanism possesses the capability to detect if a token has been
+compromised and is being misused.</p></li>
 </ul>
-<p>compromised and is being misused.</p>
 </section>
 
 
