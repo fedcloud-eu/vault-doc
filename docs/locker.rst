@@ -19,7 +19,15 @@ token to their VMs. Key security attributes of the locker system include:
 Basic usage
 ***********
 
-* **Create a locker**: Users can explicitly define the number of uses and time-to-live
+The usage of lockers is very simple: just create a locker (access token required for this operation),
+then use the returned locker token for usual operations: put some secrets to the locker, listing secrets,
+getting some secrets from lockers. As the lockers are isolated and non-personal, users can put locker tokens
+to VMs or CI/CD pipelines, send the locker tokens to other users without risking personal information and
+secrets.
+
+* **Create a locker**: Users can explicitly define the number of uses and time-to-live.
+  If not, the default values will be used. Add `--verbose` for getting more information
+  at the output.
 
 ::
 
@@ -38,15 +46,15 @@ Basic usage
     orphan           False
     num_uses         10
 
-* **Using a locker**: Add the option `--locker-token locker-token` and use `fedcloud secret put/get/list`
-  as normally.
+* **Using a locker**: Add the option `--locker-token token` and use `fedcloud secret put/get/list`
+  as normally. No access token is needed.
 
 ::
 
     $ fedcloud secret put mysecret password=123456 --locker-token hvs.CAESIXXX
 
 
-The locker token may be set as OS environment variable like access token
+The locker token may be set as OS environment variable like access token.
 
 ::
 
