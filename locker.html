@@ -100,36 +100,34 @@ compromised and is being misused.</p></li>
 <ul class="simple">
 <li><p><strong>Create a locker</strong>: Users can explicitly define the number of uses and time-to-live</p></li>
 </ul>
-<dl>
-<dt>::</dt><dd><p>$ fedcloud secret locker create
-hvs.CAESIGXXX</p>
-<p>$ fedcloud secret locker create --ttl 24h --num-uses 10 –-verbose
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret locker create
+hvs.CAESIGXXX
+
+$ fedcloud secret locker create --ttl 24h --num-uses 10 –-verbose
 key              value
 ---------------  -------------------------------------------------------
 client_token     hvs.CAESIGXXX        &lt;= This is the token
 accessor         o3GXXXXXXXXXXXXX
-policies         ['default']
-token_policies   ['default']
+policies         [&#39;default&#39;]
+token_policies   [&#39;default&#39;]
 lease_duration   86400
 renewable        False
 orphan           False
-num_uses         10</p>
-</dd>
-</dl>
+num_uses         10
+</pre></div>
+</div>
 <ul class="simple">
 <li><p><strong>Using a locker</strong>: Add the option <cite>--locker-token locker-token</cite> and use <cite>fedcloud secret put/get/list</cite>
 as normally.</p></li>
 </ul>
-<dl class="simple">
-<dt>::</dt><dd><p>$ fedcloud secret put mysecret password=123456 --locker-token hvs.CAESIXXX</p>
-</dd>
-</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret put mysecret password=123456 --locker-token hvs.CAESIXXX
+</pre></div>
+</div>
 <p>The locker token may be set as OS environment variable like access token</p>
-<dl class="simple">
-<dt>::</dt><dd><p>$ export FEDCLOUD_LOCKER_TOKEN=hvs.CAESIXXX
-$ fedcloud secret get mysecret</p>
-</dd>
-</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export FEDCLOUD_LOCKER_TOKEN=hvs.CAESIXXX
+$ fedcloud secret get mysecret
+</pre></div>
+</div>
 <ul class="simple">
 <li><p><strong>Checking and destroying lockers</strong>: Users can check locker information and destroy it if needed. If not,
 lockers will be automatically deleted if the number of uses or TTL are expired.</p></li>
