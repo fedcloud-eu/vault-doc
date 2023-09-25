@@ -48,7 +48,10 @@
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">User guides</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Lockers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Lockers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basic-usage">Basic usage</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="vault.html">Using Secret management service via Vault's GUI and client</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design.html">Service design and implementation</a></li>
 </ul>
@@ -92,6 +95,57 @@ the risk of exposing personal secrets.</p></li>
 <li><p><strong>Malfeasance detection</strong>: The locker mechanism possesses the capability to detect if a token has been
 compromised and is being misused.</p></li>
 </ul>
+<section id="basic-usage">
+<h2>Basic usage<a class="headerlink" href="#basic-usage" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Create a locker</strong>: Users can explicitly define the number of uses and time-to-live</p></li>
+</ul>
+<dl>
+<dt>::</dt><dd><p>$ fedcloud secret locker create
+hvs.CAESIGXXX</p>
+<p>$ fedcloud secret locker create --ttl 24h --num-uses 10 –-verbose
+key              value
+---------------  -------------------------------------------------------
+client_token     hvs.CAESIGXXX        &lt;= This is the token
+accessor         o3GXXXXXXXXXXXXX
+policies         ['default']
+token_policies   ['default']
+lease_duration   86400
+renewable        False
+orphan           False
+num_uses         10</p>
+</dd>
+</dl>
+<ul class="simple">
+<li><p><strong>Using a locker</strong>: Add the option <cite>--locker-token locker-token</cite> and use <cite>fedcloud secret put/get/list</cite>
+as normally.</p></li>
+</ul>
+<dl class="simple">
+<dt>::</dt><dd><p>$ fedcloud secret put mysecret password=123456 --locker-token hvs.CAESIXXX</p>
+</dd>
+</dl>
+<p>The locker token may be set as OS environment variable like access token</p>
+<dl class="simple">
+<dt>::</dt><dd><p>$ export FEDCLOUD_LOCKER_TOKEN=hvs.CAESIXXX
+$ fedcloud secret get mysecret</p>
+</dd>
+</dl>
+<ul class="simple">
+<li><p><strong>Checking and destroying lockers</strong>: Users can check locker information and destroy it if needed. If not,
+lockers will be automatically deleted if the number of uses or TTL are expired.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret locker check hvs.CAESIXXX
+key               value
+----------------  -----------------------------------------------------
+accessor          qb52XXXXXX
+creation_time     1685008416
+creation_ttl      86400
+...
+
+$ fedcloud secret locker revoke hvs.CAESIXXX
+</pre></div>
+</div>
+</section>
 </section>
 
 
