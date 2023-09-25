@@ -22,6 +22,7 @@ Basic usage
 * **Create a locker**: Users can explicitly define the number of uses and time-to-live
 
 ::
+
     $ fedcloud secret locker create
     hvs.CAESIGXXX
 
@@ -41,12 +42,14 @@ Basic usage
   as normally.
 
 ::
+
     $ fedcloud secret put mysecret password=123456 --locker-token hvs.CAESIXXX
 
 
 The locker token may be set as OS environment variable like access token
 
 ::
+
     $ export FEDCLOUD_LOCKER_TOKEN=hvs.CAESIXXX
     $ fedcloud secret get mysecret
 
