@@ -97,8 +97,15 @@ compromised and is being misused.</p></li>
 </ul>
 <section id="basic-usage">
 <h2>Basic usage<a class="headerlink" href="#basic-usage" title="Permalink to this heading"></a></h2>
+<p>The usage of lockers is very simple: just create a locker (access token required for this operation),
+then use the returned locker token for usual operations: put some secrets to the locker, listing secrets,
+getting some secrets from lockers. As the lockers are isolated and non-personal, users can put locker tokens
+to VMs or CI/CD pipelines, send the locker tokens to other users without risking personal information and
+secrets.</p>
 <ul class="simple">
-<li><p><strong>Create a locker</strong>: Users can explicitly define the number of uses and time-to-live</p></li>
+<li><p><strong>Create a locker</strong>: Users can explicitly define the number of uses and time-to-live.
+If not, the default values will be used. Add <cite>--verbose</cite> for getting more information
+at the output.</p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret locker create
 hvs.CAESIGXXX
@@ -117,13 +124,13 @@ num_uses         10
 </pre></div>
 </div>
 <ul class="simple">
-<li><p><strong>Using a locker</strong>: Add the option <cite>--locker-token locker-token</cite> and use <cite>fedcloud secret put/get/list</cite>
-as normally.</p></li>
+<li><p><strong>Using a locker</strong>: Add the option <cite>--locker-token token</cite> and use <cite>fedcloud secret put/get/list</cite>
+as normally. No access token is needed.</p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedcloud secret put mysecret password=123456 --locker-token hvs.CAESIXXX
 </pre></div>
 </div>
-<p>The locker token may be set as OS environment variable like access token</p>
+<p>The locker token may be set as OS environment variable like access token.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export FEDCLOUD_LOCKER_TOKEN=hvs.CAESIXXX
 $ fedcloud secret get mysecret
 </pre></div>
