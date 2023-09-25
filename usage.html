@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>User guides &mdash; Vault-doc  documentation</title>
@@ -11,15 +11,15 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Using Secret management service via Vault&#39;s GUI and client" href="vault.html" />
+    <link rel="next" title="Lockers" href="locker.html" />
     <link rel="prev" title="Quickstart" href="quickstart.html" /> 
 </head>
 
@@ -28,12 +28,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html">
-            <img src="_static/vault-logo-small.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/vault-logo-small.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -55,6 +59,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#reading-data-from-standard-inputs">Reading data from standard inputs</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="locker.html">Lockers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vault.html">Using Secret management service via Vault's GUI and client</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design.html">Service design and implementation</a></li>
 </ul>
@@ -72,8 +77,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>User guides</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">User guides</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/fedcloud-eu/vault-doc/blob/master/docs/usage.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -106,7 +111,7 @@ existing secret.</p>
 <li><p>The latest version of <a class="reference external" href="https://fedcloudclient.fedcloud.eu/">FedCloud client</a>
 (1.2.19 and higher) is installed. If not, install or upgrade the client:</p></li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3 install -U fedcloudclient
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span>fedcloudclient
 </pre></div>
 </div>
 <ul class="simple">
@@ -114,7 +119,7 @@ existing secret.</p>
 <a class="reference external" href="https://aai.egi.eu/token">EGI Check-in Token Portal</a>
 or <a class="reference external" href="https://indigo-dc.gitbook.io/oidc-agent/">oidc-agent</a>, is set to environment variable:</p></li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span> <span class="nv">OIDC_ACCESS_TOKEN</span><span class="o">=</span>&lt;ACCESS_TOKEN&gt;
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">OIDC_ACCESS_TOKEN</span><span class="o">=</span>&lt;ACCESS_TOKEN&gt;
 </pre></div>
 </div>
 </section>
@@ -127,13 +132,13 @@ access the service immediately with simple commands without understanding detail
 <li><p>Create a secret object <code class="docutils literal notranslate"><span class="pre">my_app_secrets</span></code> in Secret management service, store MySQL and admin passwords in the
 secret object:</p></li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret put my_app_secrets <span class="nv">mysql_password</span><span class="o">=</span><span class="m">123456</span> <span class="nv">admin_password</span><span class="o">=</span>abcdef
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>put<span class="w"> </span>my_app_secrets<span class="w"> </span><span class="nv">mysql_password</span><span class="o">=</span><span class="m">123456</span><span class="w"> </span><span class="nv">admin_password</span><span class="o">=</span>abcdef
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>List secret objects stored in Secret management service:</p></li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret list
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>list
 <span class="go">my_app_secrets</span>
 </pre></div>
 </div>
@@ -142,25 +147,25 @@ secret object:</p></li>
 secret value corresponding to the key (what is useful for scripting), otherwise it will print the table of all
 <code class="docutils literal notranslate"><span class="pre">key:value</span></code> pairs.</p></li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get my_app_secrets
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>get<span class="w"> </span>my_app_secrets
 <span class="go">key             value</span>
 <span class="go">--------------  -------</span>
 <span class="go">admin_password  abcdef</span>
 <span class="go">mysql_password  123456</span>
 
 
-<span class="gp">$ </span>fedcloud secret get my_app_secrets mysql_password
+<span class="gp">$ </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>get<span class="w"> </span>my_app_secrets<span class="w"> </span>mysql_password
 <span class="go">123456</span>
 
-<span class="gp">$ </span><span class="nv">ADMIN_PASSWORD</span><span class="o">=</span><span class="k">$(</span>fedcloud secret get my_app_secrets admin_password<span class="k">)</span>
-<span class="gp">$ </span><span class="nb">echo</span> <span class="nv">$ADMIN_PASSWORD</span>
+<span class="gp">$ </span><span class="nv">ADMIN_PASSWORD</span><span class="o">=</span><span class="k">$(</span>fedcloud<span class="w"> </span>secret<span class="w"> </span>get<span class="w"> </span>my_app_secrets<span class="w"> </span>admin_password<span class="k">)</span>
+<span class="gp">$ </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$ADMIN_PASSWORD</span>
 <span class="go">abcdef</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>Delete a secret object from Secret management service.</p></li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret delete my_app_secrets
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>delete<span class="w"> </span>my_app_secrets
 </pre></div>
 </div>
 </section>
@@ -169,12 +174,12 @@ secret value corresponding to the key (what is useful for scripting), otherwise 
 <p>If the value string is started with <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>, the FedCloud client will read the content of the file with the name for the
 value of the key. The following command creates a secret object <code class="docutils literal notranslate"><span class="pre">certificate</span></code> in Secret management service for storing
 host certificate and host key:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret put certificate <span class="nv">cert</span><span class="o">=</span>@hostcert.pem <span class="nv">key</span><span class="o">=</span>@hostkey.pem
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>put<span class="w"> </span>certificate<span class="w"> </span><span class="nv">cert</span><span class="o">=</span>@hostcert.pem<span class="w"> </span><span class="nv">key</span><span class="o">=</span>@hostkey.pem
 </pre></div>
 </div>
 <p>Users can get the certificate latter on the target VM as follows:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get certificate cert &gt; hostcert.pem
-<span class="gp">$ </span>fedcloud secret get certificate key  &gt; hostkey.pem
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>get<span class="w"> </span>certificate<span class="w"> </span>cert<span class="w"> </span>&gt;<span class="w"> </span>hostcert.pem
+<span class="gp">$ </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>get<span class="w"> </span>certificate<span class="w"> </span>key<span class="w">  </span>&gt;<span class="w"> </span>hostkey.pem
 </pre></div>
 </div>
 <p>The limit size of the secret object is 512kB, it is sufficient for storing tokens, certificates, configuration files
@@ -186,9 +191,9 @@ and so on. For larger datasets, please use permanent cloud storages.</p>
 support for storing small binary files as secret values by encoding/decoding the binary data to ASCII via
 <a class="reference external" href="https://docs.python.org/3/library/base64.html">base64</a>. Users need to add option <code class="docutils literal notranslate"><span class="pre">--binary-file</span></code> or <code class="docutils literal notranslate"><span class="pre">-b</span></code> when
 reading/writing binary secret values from/to files:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret put secret-image <span class="nv">image</span><span class="o">=</span>@secret-image.png --binary-file
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>put<span class="w"> </span>secret-image<span class="w"> </span><span class="nv">image</span><span class="o">=</span>@secret-image.png<span class="w"> </span>--binary-file
 
-<span class="gp">$ </span>fedcloud secret get secret-image image -b &gt; received-image.png
+<span class="gp">$ </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>get<span class="w"> </span>secret-image<span class="w"> </span>image<span class="w"> </span>-b<span class="w"> </span>&gt;<span class="w"> </span>received-image.png
 </pre></div>
 </div>
 </section>
@@ -197,18 +202,18 @@ reading/writing binary secret values from/to files:</p>
 <p>For highly-sensitive secrets, users can choose to encrypt the secret values before putting them to the service. The
 encryption is done automatically on the fly if an encryption key (passphrase) is provided via option
 <code class="docutils literal notranslate"><span class="pre">--encrypt-key</span></code> or <code class="docutils literal notranslate"><span class="pre">-e</span></code>:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret put certificate <span class="nv">cert</span><span class="o">=</span>@hostcert.pem <span class="nv">key</span><span class="o">=</span>@hostkey.pem --encrypt-key my-pass-phrase
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>put<span class="w"> </span>certificate<span class="w"> </span><span class="nv">cert</span><span class="o">=</span>@hostcert.pem<span class="w"> </span><span class="nv">key</span><span class="o">=</span>@hostkey.pem<span class="w"> </span>--encrypt-key<span class="w"> </span>my-pass-phrase
 </pre></div>
 </div>
 <p>Decryption is done in a similar way, just by providing decryption key via option
 <code class="docutils literal notranslate"><span class="pre">--decrypt-key</span></code> or <code class="docutils literal notranslate"><span class="pre">-d</span></code> when reading, the secret values will be decrypted
 automatically if the key is correct:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get certificate cert --decrypt-key my-pass-phrase
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>get<span class="w"> </span>certificate<span class="w"> </span>cert<span class="w"> </span>--decrypt-key<span class="w"> </span>my-pass-phrase
 </pre></div>
 </div>
 <p>Only secret values are encrypted, not their keys. Users can verify what is actually stored in the Secret management
 service by reading the secret object without providing decryption key:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get certificate cert
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>get<span class="w"> </span>certificate<span class="w"> </span>cert
 <span class="go">gAAAAAB...............................</span>
 </pre></div>
 </div>
@@ -220,14 +225,14 @@ and give feedback and suggestions for improvements if possible.</p>
 <h2>Export and import secrets<a class="headerlink" href="#export-and-import-secrets" title="Permalink to this heading"></a></h2>
 <p>Users can print outputs in
 YAML/JSON format for further processing by option <code class="docutils literal notranslate"><span class="pre">--output-format</span></code> or simply <code class="docutils literal notranslate"><span class="pre">-f</span></code>:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get my_app_secrets -f json
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>get<span class="w"> </span>my_app_secrets<span class="w"> </span>-f<span class="w"> </span>json
 
-<span class="gp">$ </span>fedcloud secret get my_app_secrets -f yaml &gt; my_app_secrets.yaml
+<span class="gp">$ </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>get<span class="w"> </span>my_app_secrets<span class="w"> </span>-f<span class="w"> </span>yaml<span class="w"> </span>&gt;<span class="w"> </span>my_app_secrets.yaml
 </pre></div>
 </div>
 <p>The secret objects in YAML/JSON files can be imported back to the service by adding <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> before filenames as parameters,
 telling client to read secret objects from files:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret put my_second_app_secrets @my_app_secrets.yaml
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>put<span class="w"> </span>my_second_app_secrets<span class="w"> </span>@my_app_secrets.yaml
 </pre></div>
 </div>
 <p>Note the difference in examples: <code class="docutils literal notranslate"><span class="pre">cert=&#64;hostcert.pem</span></code> for reading the content of the file <code class="docutils literal notranslate"><span class="pre">horstcert.pem</span></code> as the
@@ -247,25 +252,25 @@ back to the service. For examples:</p>
 <ul class="simple">
 <li><p>Adding new secret values to an existing secret object:</p></li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get certificate -f json &gt; certificate.json
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>get<span class="w"> </span>certificate<span class="w"> </span>-f<span class="w"> </span>json<span class="w"> </span>&gt;<span class="w"> </span>certificate.json
 
-<span class="gp">$ </span>fedcloud secret put certificate @certificate.json <span class="nv">another_cert</span><span class="o">=</span>@usercert.pem <span class="nv">another_key</span><span class="o">=</span>@userkey.pem
+<span class="gp">$ </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>put<span class="w"> </span>certificate<span class="w"> </span>@certificate.json<span class="w"> </span><span class="nv">another_cert</span><span class="o">=</span>@usercert.pem<span class="w"> </span><span class="nv">another_key</span><span class="o">=</span>@userkey.pem
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>Deleting secret values in an existing secret object:</p></li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get certificate -f json <span class="p">|</span> jq <span class="s1">&#39;del (.another_cert, .another_key)&#39;</span> &gt; certificate.json
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>get<span class="w"> </span>certificate<span class="w"> </span>-f<span class="w"> </span>json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;del (.another_cert, .another_key)&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>certificate.json
 
-<span class="gp">$ </span>fedcloud secret put certificate @certificate.json
+<span class="gp">$ </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>put<span class="w"> </span>certificate<span class="w"> </span>@certificate.json
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>Updating secret values in an existing secret object:</p></li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get certificate -f json &gt; certificate.json
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>get<span class="w"> </span>certificate<span class="w"> </span>-f<span class="w"> </span>json<span class="w"> </span>&gt;<span class="w"> </span>certificate.json
 
-<span class="gp">$ </span>fedcloud secret put certificate @certificate.json <span class="nv">cert</span><span class="o">=</span>@new_hostcert.pem <span class="nv">key</span><span class="o">=</span>@new_hostkey.pem
+<span class="gp">$ </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>put<span class="w"> </span>certificate<span class="w"> </span>@certificate.json<span class="w"> </span><span class="nv">cert</span><span class="o">=</span>@new_hostcert.pem<span class="w"> </span><span class="nv">key</span><span class="o">=</span>@new_hostkey.pem
 </pre></div>
 </div>
 </section>
@@ -277,25 +282,25 @@ the same way as <code class="docutils literal notranslate"><span class="pre">&#6
 <ul class="simple">
 <li><p>Reading <code class="docutils literal notranslate"><span class="pre">key:value</span></code> pairs from standard input. The data need to be in JSON or YAML format:</p></li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span> <span class="s1">&#39;{&quot;mysql_password&quot;:&quot;123456&quot;}&#39;</span> <span class="p">|</span> fedcloud secret put my_app_secrets -
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;mysql_password&quot;:&quot;123456&quot;}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>put<span class="w"> </span>my_app_secrets<span class="w"> </span>-
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>Reading only secret value from standard input:</p></li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span> <span class="s2">&quot;abcdef&quot;</span> <span class="p">|</span> fedcloud secret put my_app_secrets <span class="nv">admin_password</span><span class="o">=</span>-
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;abcdef&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>put<span class="w"> </span>my_app_secrets<span class="w"> </span><span class="nv">admin_password</span><span class="o">=</span>-
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>Copying a secret object. The command export the existing secret object to JSON and import it as a new copy:</p></li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get my_app_secrets -f json <span class="p">|</span> fedcloud secret put new-secret-copy -
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>get<span class="w"> </span>my_app_secrets<span class="w"> </span>-f<span class="w"> </span>json<span class="w"> </span><span class="p">|</span><span class="w"> </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>put<span class="w"> </span>new-secret-copy<span class="w"> </span>-
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>Adding new secret values to an existing secret object (in example above) without storing secrets in intermediate files:</p></li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud secret get certificate -f json <span class="p">|</span> fedcloud secret put certificate - <span class="nv">another_cert</span><span class="o">=</span>@usercert.pem <span class="nv">another_key</span><span class="o">=</span>@userkey.pem
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>get<span class="w"> </span>certificate<span class="w"> </span>-f<span class="w"> </span>json<span class="w"> </span><span class="p">|</span><span class="w"> </span>fedcloud<span class="w"> </span>secret<span class="w"> </span>put<span class="w"> </span>certificate<span class="w"> </span>-<span class="w"> </span><span class="nv">another_cert</span><span class="o">=</span>@usercert.pem<span class="w"> </span><span class="nv">another_key</span><span class="o">=</span>@userkey.pem
 </pre></div>
 </div>
 </section>
@@ -306,7 +311,7 @@ the same way as <code class="docutils literal notranslate"><span class="pre">&#6
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="quickstart.html" class="btn btn-neutral float-left" title="Quickstart" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="vault.html" class="btn btn-neutral float-right" title="Using Secret management service via Vault&#39;s GUI and client" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="locker.html" class="btn btn-neutral float-right" title="Lockers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
